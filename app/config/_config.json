@@ -1,0 +1,4 @@
+{
+    "secret" : "secretPassphrase",
+    "database": "mongodb://username:password@host:port/database"
+}
