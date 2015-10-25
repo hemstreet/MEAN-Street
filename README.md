@@ -22,3 +22,4 @@ Run `node server.js` and you are good to go.
 * [ ] Form render from Schema
 * [ ] Dynamic routes
 * [ ] View Templates
+* [ ] Server prototype type instantiation for quick deploy `new Server({ port: 3001 }); 
