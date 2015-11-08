@@ -1,2 +1,8 @@
 .idea/*
 app/config/config.json
+
+app/schemas/*
+app/models/*
+
+!app/schemas/user.json
+!app/models/user.js

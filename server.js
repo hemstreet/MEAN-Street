@@ -15,7 +15,11 @@ var modelPath = './app/models/',
     models = {};
 
 // Autoload Models
-glob(modelPath + '*', function (er, files) {
+glob(modelPath + '*', function (err, files) {
+
+    if(err) {
+        return err;
+    }
 
     _.forEach(files, function(filePath) {
         var chunks = filePath.split('/'),
@@ -23,7 +27,6 @@ glob(modelPath + '*', function (er, files) {
             modelName = fileName.split('.')[0];
 
         models[_.capitalize(modelName)] = require(modelPath + modelName);
-
     });
 
 });
@@ -50,12 +53,10 @@ router.route('/authenticate')
                     res.send(err);
                 }
 
-                console.log(user);
                 if (!user) {
                     res.json({message: "Authentication failed. User not found", success: false});
                 }
                 else if (user) {
-                    console.log(user);
                     if (user.password != req.body.password) {
                         res.send({message: "Authentication failed. Invalid password", success: false});
                     }
@@ -182,7 +183,7 @@ router.route('/:model')
 
             res.json({
                 success: true,
-                message: modelParam + "Created",
+                message: modelName + "Created",
                 model: model
             });
         })
