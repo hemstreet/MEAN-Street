@@ -17,9 +17,9 @@ Run `node server.js` and you are good to go.
 * [ ] Password hashing
 * [ ] Register / Sign up
 * [ ] Module loader
-* [ ] Auto loader
+* [x] Auto loader
 * [ ] Form render from Schema
-* [ ] Dynamic routes
+* [x] Dynamic routes
 * [ ] View Templates
 * [ ] Server prototype type instantiation for quick deploy `new Server({ port: 3001 }); 
 
