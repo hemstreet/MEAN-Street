@@ -7,219 +7,200 @@ var express = require('express'),
     router = express.Router(),
     jwt = require('jsonwebtoken'),
     config = require('./app/config/config'),
-    glob = require('glob'),
-    _ = require('lodash');
+    _ = require('lodash'),
+    Model = require('./lib/model.js'),
+    modellUtil = new Model();
 
+
+// @TODO change modelPath to be passed in via args
 // Models
-var modelPath = './app/models/',
-    models = {};
+var _models = modellUtil.getModels();
 
-// Autoload Models
-glob(modelPath + '*', function (err, files) {
+_models.then(function( models) {
+    mongoose.connect(config.database);
+    app.use(bodyParser.urlencoded({extend: true}));
+    app.use(bodyParser.json());
 
-    if(err) {
-        return err;
-    }
+    app.use(morgan('dev'));
 
-    _.forEach(files, function(filePath) {
-        var chunks = filePath.split('/'),
-            fileName = chunks[chunks.length - 1],
-            modelName = fileName.split('.')[0];
+    router.route('/authenticate')
+        .post(function (req, res) {
+            models['User'].findOne({
+                    "name": req.body.name
+                },
+                function (err, user) {
+                    if (err) {
+                        res.send(err);
+                    }
 
-        models[_.capitalize(modelName)] = require(modelPath + modelName);
+                    if (!user) {
+                        res.json({message: "Authentication failed. User not found", success: false});
+                    }
+                    else if (user) {
+                        if (user.password != req.body.password) {
+                            res.send({message: "Authentication failed. Invalid password", success: false});
+                        }
+                        else {
+                            // Expires in 1 year
+                            var token = jwt.sign(user, config.secret, {
+                                expiresIn: 60 * 60 * 24 * 7 * 52
+                            });
+
+                            res.send({
+                                success: true,
+                                message: 'Authentication successful for ' + user.name,
+                                token: token
+                            });
+                        }
+                    }
+                }
+            )
+        });
+
+    router.use(function (req, res, next) {
+
+        var token = req.body.token || req.query.token || req.headers['x-access-token'];
+
+        if (token) {
+            jwt.verify(token, config.secret, function (err, decoded) {
+                if (err) {
+                    return res.send({
+                        success: false,
+                        message: 'Failure to authenticate token'
+                    });
+                }
+                else {
+                    req.decoded = decoded;
+                    next();
+                }
+            });
+        }
+        else {
+            return res.status(403).send({
+                success: false,
+                message: 'No token provided.'
+            });
+        }
     });
 
-});
+    router.route('/health')
 
-var getModelNameFromParam = function(param) {
+        .get(function (req, res) {
+            res.setHeader('Content-Type', 'application/json');
+            res.send({message: "Health Check Passed"});
+        });
 
-    return _.capitalize(param);
+    router.route('/view/:model/:id')
+        .get(function (req, res) {
+            var modelName = req.body.model;
+        });
 
-};
+    router.route('/edit/:model/:_id')
+        .get(function (req, res) {
 
-mongoose.connect(config.database);
-app.use(bodyParser.urlencoded({extend: true}));
-app.use(bodyParser.json());
+        });
 
-app.use(morgan('dev'));
+    router.route('/:model/:_id')
+        .get(function (req, res) {
+            var modelName = modellUtil.getModelName(req.params.model);
 
-router.route('/authenticate')
-    .post(function (req, res) {
-        models['User'].findOne({
-                "name": req.body.name
-            },
-            function (err, user) {
+            models[modelName].findById(req.params._id, function (err, entry) {
                 if (err) {
                     res.send(err);
                 }
 
-                if (!user) {
-                    res.json({message: "Authentication failed. User not found", success: false});
-                }
-                else if (user) {
-                    if (user.password != req.body.password) {
-                        res.send({message: "Authentication failed. Invalid password", success: false});
-                    }
-                    else {
-                        // Expires in 1 year
-                        var token = jwt.sign(user, config.secret, {
-                            expiresIn: 60 * 60 * 24 * 7 * 52
-                        });
-
-                        res.send({
-                            success: true,
-                            message: 'Authentication successful for ' + user.name,
-                            token: token
-                        });
-                    }
-                }
-            }
-        )
-    });
-
-router.use(function (req, res, next) {
-
-    var token = req.body.token || req.query.token || req.headers['x-access-token'];
-
-    if (token) {
-        jwt.verify(token, config.secret, function (err, decoded) {
-            if (err) {
-                return res.send({
-                    success: false,
-                    message: 'Failure to authenticate token'
-                });
-            }
-            else {
-                req.decoded = decoded;
-                next();
-            }
-        });
-    }
-    else {
-        return res.status(403).send({
-            success: false,
-            message: 'No token provided.'
-        });
-    }
-});
-
-router.route('/health')
-
-    .get(function (req, res) {
-        res.setHeader('Content-Type', 'application/json');
-        res.send({ message: "Health Check Passed" });
-    });
-
-router.route('/view/:model/:id')
-    .get(function(req, res) {
-        var modelName = req.body.model;
-    });
-
-router.route('/edit/:model/:_id')
-    .get(function(req, res) {
-
-    });
-
-router.route('/:model/:_id')
-    .get(function (req, res) {
-        var modelName = getModelNameFromParam(req.params.model);
-
-        models[modelName].findById(req.params._id, function (err, entry) {
-            if (err) {
-                res.send(err);
-            }
-
-            res.json(entry);
+                res.json(entry);
+            })
         })
-    })
-    .put(function (req, res) {
-        var modelName = getModelNameFromParam(req.params.model);
+        .put(function (req, res) {
+            var modelName = modellUtil.getModelName(req.params.model);
 
-        models[modelName].findById(req.params._id, function (err, entry) {
-            if (err) {
-                res.send(err);
-            }
+            models[modelName].findById(req.params._id, function (err, entry) {
+                if (err) {
+                    res.send(err);
+                }
 
-            entry.name = req.body.name;
+                entry.name = req.body.name;
 
-            entry.save(function (err) {
+                entry.save(function (err) {
+                    if (err) {
+                        res.send(err);
+                    }
+
+                    res.json({
+                        success: true,
+                        message: model + " Updated",
+                        user: user
+                    });
+                })
+            })
+        })
+        .delete(function (req, res) {
+            var modelName = modellUtil.getModelName(req.params.model),
+                Model = models[modelName];
+
+            Model.findById(req.params._id, function (err, entry) {
+                Model.remove({
+                    _id: req.params._id
+                }, function (err) {
+                    if (err) {
+                        res.send(err);
+                    }
+
+                    res.json({
+                        success: true,
+                        message: model + " Deleted"
+                    });
+                });
+            });
+        });
+
+    router.route('/:model')
+
+        .post(function (req, res) {
+
+            var modelName = modellUtil.getModelName(req.params.model),
+                Model = models[modelName];
+
+            var model = new Model(),
+                modelSchema = model.schema.paths;
+
+            _.forEach(Object.keys(modelSchema), function (n) {
+
+                if (n[0] !== '_') {
+                    if (req.body[n]) {
+                        model[n] = req.body[n];
+                    }
+                }
+            });
+
+            model.save(function (err) {
                 if (err) {
                     res.send(err);
                 }
 
                 res.json({
                     success: true,
-                    message: model + " Updated",
-                    user: user
+                    message: modelName + " Created",
+                    model: model
                 });
             })
         })
-    })
-    .delete(function (req, res) {
-        var modelName = getModelNameFromParam(req.params.model),
-            Model = models[modelName];
 
-        Model.findById(req.params._id, function (err, entry) {
-            Model.remove({
-                _id: req.params._id
-            }, function (err, entry) {
+        .get(function (req, res) {
+            var modelName = modellUtil.getModelName(req.params.model);
+
+            models[modelName].find(function (err, entries) {
                 if (err) {
                     res.send(err);
                 }
 
-                res.json({
-                    success: true,
-                    message: model + " Deleted"
-                });
+                res.json(entries);
             });
         });
-    });
 
-router.route('/:model')
+    app.use('/v1/rest', router);
 
-    .post(function (req, res) {
-
-        var modelName = getModelNameFromParam(req.params.model),
-            Model = models[modelName];
-
-        var model = new Model(),
-            modelSchema = model.schema.paths;
-
-        _.forEach(Object.keys(modelSchema), function(n) {
-
-            if(n[0] !== '_') {
-                if(req.body[n]) {
-                    model[n] = req.body[n];
-                }
-            }
-        });
-
-        model.save(function (err) {
-            if (err) {
-                res.send(err);
-            }
-
-            res.json({
-                success: true,
-                message: modelName + " Created",
-                model: model
-            });
-        })
-    })
-
-    .get(function (req, res) {
-        var modelName = getModelNameFromParam(req.params.model);
-
-        models[modelName].find(function (err, entries) {
-            if (err) {
-                res.send(err);
-            }
-
-            res.json(entries);
-        });
-    });
-
-app.use('/v1/rest', router);
-
-app.listen(port);
-console.log('REST server listening on port', port);
+    app.listen(port);
+    console.log('REST server listening on port', port);
+});
