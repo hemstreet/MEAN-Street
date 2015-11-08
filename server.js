@@ -10,20 +10,16 @@ var express = require('express'),
     _ = require('lodash'),
     Model = require('./lib/model.js'),
     modellUtil = new Model(),
-    cons = require('consolidate'),
-    viewEngine = 'ejs';
+    BASEAPP = __dirname + '/app',
+    passwordHash = require('password-hash');
 
-app.engine('html', cons[viewEngine]);
+app.set('models', BASEAPP + '/models');
+app.set('baseUrl', '/v1/rest');
 
-// set .html as the default extension
-app.set('view engine', 'html');
-app.set('views', __dirname + '/app/views');
-
-// @TODO change modelPath to be passed in via args
 // Models
 var _models = modellUtil.getModels();
 
-_models.then(function( models) {
+_models.then(function (models) {
     mongoose.connect(config.database);
     app.use(bodyParser.urlencoded({extend: true}));
     app.use(bodyParser.json());
@@ -44,13 +40,13 @@ _models.then(function( models) {
                         res.json({message: "Authentication failed. User not found", success: false});
                     }
                     else if (user) {
-                        if (user.password != req.body.password) {
-                            res.send({message: "Authentication failed. Invalid password", success: false});
-                        }
-                        else {
+                        console.log(req.body.password, user.password);
+                        console.log('hashed password', passwordHash.verify(req.body.password, user.password));
+                        if (passwordHash.verify(req.body.password, user.password)) {
+                            var exp = 60 * 60 * 24 * 7 * 52;
                             // Expires in 1 year
                             var token = jwt.sign(user, config.secret, {
-                                expiresIn: 60 * 60 * 24 * 7 * 52
+                                expiresIn: exp
                             });
 
                             res.send({
@@ -59,9 +55,44 @@ _models.then(function( models) {
                                 token: token
                             });
                         }
+                        else {
+                            res.send({message: "Authentication failed. Invalid password", success: false});
+                        }
                     }
                 }
             )
+        });
+
+    router.route('/signup')
+        .post(function (req, res) {
+
+            var Model = models['User'],
+                model = new Model(),
+                modelSchema = model.schema.paths;
+
+            _.forEach(Object.keys(modelSchema), function (n) {
+
+                if (n[0] !== '_') {
+                    if (req.body[n]) {
+                        model[n] = req.body[n];
+                    }
+                }
+            });
+
+            model.password = passwordHash.generate(req.body.password);
+
+            model.save(function (err) {
+                if (err) {
+                    res.send(err);
+                }
+
+                res.json({
+                    success: true,
+                    message: "User Created",
+                    model: model
+                });
+            })
+
         });
 
     router.use(function (req, res, next) {
@@ -90,35 +121,6 @@ _models.then(function( models) {
         }
     });
 
-    router.route('/health')
-
-        .get(function (req, res) {
-            res.setHeader('Content-Type', 'application/json');
-            res.send({message: "Health Check Passed"});
-        });
-
-    router.route('/view/:model/:_id')
-        .get(function (req, res) {
-            var modelName = modellUtil.getModelName(req.params.model);
-
-            models[modelName].findById(req.params._id, function (err, entry) {
-                if (err) {
-                    res.send(err);
-                }
-
-                res.render('forms/form', {
-                    title: entry.name,
-                    entry: entry
-                });
-
-            })
-        });
-
-    router.route('/edit/:model/:_id')
-        .get(function (req, res) {
-
-        });
-
     router.route('/:model/:_id')
         .get(function (req, res) {
             var modelName = modellUtil.getModelName(req.params.model);
@@ -139,8 +141,6 @@ _models.then(function( models) {
                     res.send(err);
                 }
 
-                entry.name = req.body.name;
-
                 entry.save(function (err) {
                     if (err) {
                         res.send(err);
@@ -149,7 +149,7 @@ _models.then(function( models) {
                     res.json({
                         success: true,
                         message: model + " Updated",
-                        user: user
+                        entry: entry
                     });
                 })
             })
@@ -218,8 +218,7 @@ _models.then(function( models) {
             });
         });
 
-
-    app.use('/v1/rest', router);
+    app.use(app.get('baseUrl'), router);
 
     app.listen(port);
     console.log('REST server listening on port', port);
