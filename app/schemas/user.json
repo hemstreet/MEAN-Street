@@ -1,6 +1,14 @@
 {
-  "name": "String",
-  "password": "String",
-  "admin": "Boolean",
-  "testParam" : "String"
+  "name": {
+    "type": "String"
+  },
+  "password": {
+    "type": "String"
+  },
+  "admin": {
+    "type": "Boolean"
+  },
+  "testParam": {
+    "type": "String"
+  }
 }

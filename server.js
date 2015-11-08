@@ -110,6 +110,16 @@ router.route('/health')
         res.send({ message: "Health Check Passed" });
     });
 
+router.route('/view/:model/:id')
+    .get(function(req, res) {
+        var modelName = req.body.model;
+    });
+
+router.route('/edit/:model/:_id')
+    .get(function(req, res) {
+
+    });
+
 router.route('/:model/:_id')
     .get(function (req, res) {
         var modelName = getModelNameFromParam(req.params.model);
