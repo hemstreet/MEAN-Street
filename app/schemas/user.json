@@ -1,5 +1,6 @@
 {
   "name": "String",
   "password": "String",
-  "admin": "Boolean"
+  "admin": "Boolean",
+  "testParam" : "String"
 }

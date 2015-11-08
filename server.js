@@ -172,9 +172,17 @@ router.route('/:model')
         var modelName = getModelNameFromParam(req.params.model),
             Model = models[modelName];
 
-        var model = new Model();
-        //user.name = req.body.name;
-        //user.password = req.body.password;
+        var model = new Model(),
+            modelSchema = model.schema.paths;
+
+        _.forEach(Object.keys(modelSchema), function(n) {
+
+            if(n[0] !== '_') {
+                if(req.body[n]) {
+                    model[n] = req.body[n];
+                }
+            }
+        });
 
         model.save(function (err) {
             if (err) {
@@ -183,7 +191,7 @@ router.route('/:model')
 
             res.json({
                 success: true,
-                message: modelName + "Created",
+                message: modelName + " Created",
                 model: model
             });
         })
