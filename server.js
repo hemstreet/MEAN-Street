@@ -9,8 +9,15 @@ var express = require('express'),
     config = require('./app/config/config'),
     _ = require('lodash'),
     Model = require('./lib/model.js'),
-    modellUtil = new Model();
+    modellUtil = new Model(),
+    cons = require('consolidate'),
+    viewEngine = 'ejs';
 
+app.engine('html', cons[viewEngine]);
+
+// set .html as the default extension
+app.set('view engine', 'html');
+app.set('views', __dirname + '/app/views');
 
 // @TODO change modelPath to be passed in via args
 // Models
@@ -90,9 +97,21 @@ _models.then(function( models) {
             res.send({message: "Health Check Passed"});
         });
 
-    router.route('/view/:model/:id')
+    router.route('/view/:model/:_id')
         .get(function (req, res) {
-            var modelName = req.body.model;
+            var modelName = modellUtil.getModelName(req.params.model);
+
+            models[modelName].findById(req.params._id, function (err, entry) {
+                if (err) {
+                    res.send(err);
+                }
+
+                res.render('forms/form', {
+                    title: entry.name,
+                    entry: entry
+                });
+
+            })
         });
 
     router.route('/edit/:model/:_id')
@@ -198,6 +217,7 @@ _models.then(function( models) {
                 res.json(entries);
             });
         });
+
 
     app.use('/v1/rest', router);
 
