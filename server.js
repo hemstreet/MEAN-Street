@@ -6,10 +6,33 @@ var express = require('express'),
     port = process.env.PORT || 3000,
     router = express.Router(),
     jwt = require('jsonwebtoken'),
-    config = require('./app/config/config');
+    config = require('./app/config/config'),
+    glob = require('glob'),
+    _ = require('lodash');
 
 // Models
-var User = require('./app/models/user');
+var modelPath = './app/models/',
+    models = {};
+
+// Autoload Models
+glob(modelPath + '*', function (er, files) {
+
+    _.forEach(files, function(filePath) {
+        var chunks = filePath.split('/'),
+            fileName = chunks[chunks.length - 1],
+            modelName = fileName.split('.')[0];
+
+        models[_.capitalize(modelName)] = require(modelPath + modelName);
+
+    });
+
+});
+
+var getModelNameFromParam = function(param) {
+
+    return _.capitalize(param);
+
+};
 
 mongoose.connect(config.database);
 app.use(bodyParser.urlencoded({extend: true}));
@@ -19,7 +42,7 @@ app.use(morgan('dev'));
 
 router.route('/authenticate')
     .post(function (req, res) {
-        User.findOne({
+        models['User'].findOne({
                 "name": req.body.name
             },
             function (err, user) {
@@ -79,81 +102,101 @@ router.use(function (req, res, next) {
     }
 });
 
-router.route('/user')
-
-    .post(function (req, res) {
-        var user = new User();
-        user.name = req.body.name;
-        user.password = req.body.password;
-
-        user.save(function (err) {
-            if (err) {
-                res.send(err);
-            }
-
-            res.json({
-                success: true,
-                message: "User Created",
-                user: user
-            });
-        })
-    })
+router.route('/health')
 
     .get(function (req, res) {
-        User.find(function (err, users) {
-            if (err) {
-                res.send(err);
-            }
-
-            res.json(users);
-        });
+        res.setHeader('Content-Type', 'application/json');
+        res.send({ message: "Health Check Passed" });
     });
 
-router.route('/user/:user_id')
+router.route('/:model/:_id')
     .get(function (req, res) {
-        User.findById(req.params.user_id, function (err, user) {
+        var modelName = getModelNameFromParam(req.params.model);
+
+        models[modelName].findById(req.params._id, function (err, entry) {
             if (err) {
                 res.send(err);
             }
 
-            res.json(user);
+            res.json(entry);
         })
     })
     .put(function (req, res) {
-        User.findById(req.params.user_id, function (err, user) {
+        var modelName = getModelNameFromParam(req.params.model);
+
+        models[modelName].findById(req.params._id, function (err, entry) {
             if (err) {
                 res.send(err);
             }
 
-            user.name = req.body.name;
+            entry.name = req.body.name;
 
-            user.save(function (err) {
+            entry.save(function (err) {
                 if (err) {
                     res.send(err);
                 }
 
                 res.json({
                     success: true,
-                    message: "User Updated",
+                    message: model + " Updated",
                     user: user
                 });
             })
         })
     })
     .delete(function (req, res) {
-        User.findById(req.params.user_id, function (err, user) {
-            User.remove({
-                _id: req.params.user_id
-            }, function (err, user) {
+        var modelName = getModelNameFromParam(req.params.model),
+            Model = models[modelName];
+
+        Model.findById(req.params._id, function (err, entry) {
+            Model.remove({
+                _id: req.params._id
+            }, function (err, entry) {
                 if (err) {
                     res.send(err);
                 }
 
                 res.json({
                     success: true,
-                    message: "User Deleted"
+                    message: model + " Deleted"
                 });
             });
+        });
+    });
+
+router.route('/:model')
+
+    .post(function (req, res) {
+
+        var modelName = getModelNameFromParam(req.params.model),
+            Model = models[modelName];
+
+        var model = new Model();
+        //user.name = req.body.name;
+        //user.password = req.body.password;
+
+        model.save(function (err) {
+            if (err) {
+                res.send(err);
+            }
+
+            res.json({
+                success: true,
+                message: modelParam + "Created",
+                model: model
+            });
+        })
+    })
+
+    .get(function (req, res) {
+        var modelName = getModelNameFromParam(req.params.model);
+
+        models[modelName].find(function (err, entries) {
+            if (err) {
+                res.send(err);
+            }
+
+            res.json(entries);
         });
     });
 

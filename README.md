@@ -1,8 +1,7 @@
+* This project is a work in progress *
+
 Node REST
 ===
-
-*** This project is a work in progress ***
-
 
 Getting started
 ===
@@ -23,3 +22,8 @@ Run `node server.js` and you are good to go.
 * [ ] Dynamic routes
 * [ ] View Templates
 * [ ] Server prototype type instantiation for quick deploy `new Server({ port: 3001 }); 
+
+
+Models
+===
+* [http://mongoosejs.com/docs/2.7.x/docs/schematypes.html](http://mongoosejs.com/docs/2.7.x/docs/schematypes.html)
