@@ -10,7 +10,8 @@ var express = require('express'),
     _ = require('lodash'),
     Model = require('./lib/model.js'),
     modellUtil = new Model(),
-    passwordHash = require('password-hash');
+    passwordHash = require('password-hash'),
+    form = require('./lib/form.js');
 
 var BASELIB = __dirname + '/lib';
 

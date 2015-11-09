@@ -6,9 +6,9 @@ angular.module('restServer').controller('SignupController', ['$scope', 'userServ
 
     console.log('Signup Controller');
 
-        userService.signup({
-            username: 'sdf',
-            password: 'sdf'
-        });
+        //userService.signup({
+        //    username: 'sdf',
+        //    password: 'sdf'
+        //});
 
 }]);
