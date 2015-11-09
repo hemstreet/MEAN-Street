@@ -1,0 +1,25 @@
+<html ng-app="boilerPlate">
+<head>
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+</head>
+<body>
+
+<script src="bower_components/jquery/dist/jquery.js" type="text/javascript"></script>
+<script src="bower_components/angular/angular.min.js" type="text/javascript"></script>
+<script src="bower_components/angular-route/angular-route.min.js" type="text/javascript"></script>
+<script src="app.js" type="text/javascript"></script>
+
+<!-- Controllers -->
+<script src="lib/controllers/demo/DemoController.js" type="text/javascript"></script>
+<script src="lib/controllers/mainController/MainController.js" type="text/javascript"></script>
+
+<!-- Directives -->
+<script src="lib/directives/demoTag/demoTagDirective.js" type="text/javascript"></script>
+
+<!-- Services -->
+<script src="lib/services/demo/demoService.js" type="text/javascript"></script>
+
+<div ng-view></div>
+
+</body>
+</html>

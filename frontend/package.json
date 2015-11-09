@@ -1,0 +1,17 @@
+{
+  "name": "angular",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies" : {
+    "express" : "latest",
+    "path" : "latest",
+    "angular-route" : "latest"
+  }
+}
