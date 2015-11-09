@@ -4,10 +4,17 @@ angular.module('restServer').controller('LoginController', ['$scope', 'userServi
 
     vm.pageName = 'Login';
 
-    console.log('Login Controller');
+    vm.data = null;
 
-    userService.authenticate({
-        username: 'sdf',
-        password: 'sdf'
-    });
+    vm.loginUser = function(data) {
+        userService.authenticate({
+            username: data.username,
+            password: data.password
+        }).then(function(data) {
+            vm.data = data
+        }, function(err) {
+            vm.data = err;
+            console.log('ERROR:', err);
+        });
+    };
 }]);

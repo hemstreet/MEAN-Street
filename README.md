@@ -7,8 +7,9 @@ Node REST
 
 Create a config inside of `config/config.json`. Use the `_config.json` as a template.
 Make sure to run `npm install` to get all the dependencies.
+Make sure you run `bower install` inside of the `/app` folder
 
-Run `node server.js` and youre server is setup!
+Run `node server.js` and the server is set up!
 
 * [ ] Front End
 * [x] Authentication

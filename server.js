@@ -46,13 +46,11 @@ _models.then(function (models) {
                         res.json({message: "Authentication failed. User not found", success: false});
                     }
                     else if (user) {
-                        console.log(req.body.password, user.password);
-                        console.log('hashed password', passwordHash.verify(req.body.password, user.password));
                         if (passwordHash.verify(req.body.password, user.password)) {
-                            var exp = 60 * 60 * 24 * 7 * 52;
-                            // Expires in 1 year
+
+                            // @todo break out into helper method
                             var token = jwt.sign(user, config.secret, {
-                                expiresIn: exp
+                                expiresIn: config.tokenExpiration
                             });
 
                             res.send({
@@ -92,10 +90,16 @@ _models.then(function (models) {
                     res.send(err);
                 }
 
+                // @todo break out into helper method
+                var token = jwt.sign(model, config.secret, {
+                    expiresIn: config.tokenExpiration
+                });
+
                 res.json({
                     success: true,
                     message: "User Created",
-                    model: model
+                    model: model,
+                    token: token
                 });
             })
 

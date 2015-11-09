@@ -1,12 +1,9 @@
 {{vm.pageName}}
 <br/><br/>
-<form action="{{vm.loginUrl}}" method="POST">
-
-    <label>Username</label>
-    <input type="text" name="username" />
-
-    <label>Password</label>
-    <input type="password" name="password" />
-
-    <input type="submit"/>
+<form novalidate>
+    Username: <input type="text" ng-model="user.username" /><br />
+    Password: <input type="password" ng-model="user.password" /><br />
+    <input type="submit" ng-click="vm.loginUser(user)" value="Save" />
 </form>
+
+{{vm.data}}

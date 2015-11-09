@@ -1,3 +1,10 @@
 {{vm.pageName}}
 <br/><br/>
-Signup form here
+
+<form novalidate>
+    Username: <input type="text" ng-model="user.username" /><br />
+    Password: <input type="password" ng-model="user.password" /><br />
+    <input type="submit" ng-click="vm.signupUser(user)" value="Save" />
+</form>
+
+{{vm.data}}
