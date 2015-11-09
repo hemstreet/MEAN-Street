@@ -1,0 +1,27 @@
+<html ng-app="restServer">
+<head>
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+</head>
+<body>
+
+<script src="bower_components/angular/angular.min.js" type="text/javascript"></script>
+<script src="bower_components/angular-route/angular-route.min.js" type="text/javascript"></script>
+<script src="app.js" type="text/javascript"></script>
+
+<!-- Controllers -->
+<script src="lib/controllers/loginController/LoginController.js" type="text/javascript"></script>
+<script src="lib/controllers/signupController/SignupController.js" type="text/javascript"></script>
+<script src="lib/controllers/listController/ListController.js" type="text/javascript"></script>
+<script src="lib/controllers/editController/EditController.js" type="text/javascript"></script>
+
+<!-- Directives -->
+<script src="lib/directives/list/listDirective.js" type="text/javascript"></script>
+
+<!-- Services -->
+<script src="lib/services/model/modelService.js" type="text/javascript"></script>
+<script src="lib/services/user/userService.js" type="text/javascript"></script>
+
+<div ng-view></div>
+
+</body>
+</html>
