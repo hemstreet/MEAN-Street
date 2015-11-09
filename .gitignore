@@ -1,9 +1,9 @@
 .idea/*
 
-backend/app/config/config.json
-backend/app/schemas/*
-backend/app/models/*
+config/config.json
+lib/schemas/*
+lib/models/*
 
-!backend/app/schemas/base.json
-!backend/app/schemas/user.json
-!backend/app/models/user.js
+!lib/schemas/base.json
+!lib/schemas/user.json
+!lib/models/user.js
