@@ -41,11 +41,15 @@ app.config(['$routeProvider', function ($routeProvider) {
 }]);
 
 app.run(function ($rootScope, $location, ipCookie) {
+
     $rootScope.$on('$routeChangeStart', function (event, next, current) {
+
+        // Are we trying to access a page we don't have permission to?
         if (next.requireAuth && !ipCookie('x-access-token')) {
             $location.path('/login');
         }
 
+        // We are already logged in, skip the login / signup page
         if (!next.requireAuth && ipCookie('x-access-token')) {
             $location.path('/dashboard');
         }
