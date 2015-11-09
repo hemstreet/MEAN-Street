@@ -1,4 +1,4 @@
-git sGetting Started
+Getting Started
 ---
 
 ```

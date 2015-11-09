@@ -20,8 +20,9 @@ Make sure to run `npm install` to get all the dependencies.
 
 Run `node server.js` and youre server is setup!
 
+* [ ] Front End
 * [x] Authentication
-* [ ] Password hashing
+* [x] Password hashing
 * [ ] Register / Sign up
 * [ ] Module loader
 * [x] Auto loader
