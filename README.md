@@ -3,19 +3,9 @@
 Node REST
 ===
 
-[Front End](#Frontend)
-[Back End](#Backend)
 *Make sure to have mongo running.*
 
-#Frontend
-===
-
-* this is a work in progress *
-
-
-#Backend
-===
-Create a config inside of `app/config/config.json`. Use the `_config.json` as a template.
+Create a config inside of `config/config.json`. Use the `_config.json` as a template.
 Make sure to run `npm install` to get all the dependencies.
 
 Run `node server.js` and youre server is setup!
