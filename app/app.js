@@ -1,29 +1,53 @@
 var app = angular.module('restServer', ['ngRoute', 'ipCookie']);
 
 app.constant('config', {
-    "baseUrl" : "/v1/rest",
-    "token" : {
-        "name" : "x-access-token",
-        "tokenExpiration" : 31449600
+    "baseUrl": "/v1/rest",
+    "token": {
+        "name": "x-access-token",
+        "expiration": 720
     }
 });
 
-app.config(['$routeProvider', function($routeProvider) {
-    $routeProvider.when('/login', {
+app.config(['$routeProvider', function ($routeProvider) {
+
+    $routeProvider.when('/', {
+        redirectTo: '/login'
+    }).when('/login', {
         templateUrl: 'views/login.html',
         controller: 'LoginController',
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        requireAuth: false
     }).when('/signup', {
         templateUrl: 'views/signup.html',
         controller: 'SignupController',
-        controllerAs: 'vm'
-    }).when('/models/:name/edit/:_id', {
+        controllerAs: 'vm',
+        requireAuth: false
+    }).when('/dashboard', {
+        templateUrl: 'views/dashboard.html',
+        controller: 'DashboardController',
+        controllerAs: 'vm',
+        requireAuth: true
+    }).when('/model/:name/edit/:_id', {
         templateUrl: 'views/edit.html',
         controller: 'EditController',
-        controllerAs: 'vm'
-    }).when('/models/:model', {
+        controllerAs: 'vm',
+        requireAuth: true
+    }).when('/model/:model', {
         templateUrl: 'views/list.html',
         controller: 'ListController',
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        requireAuth: true
     });
 }]);
+
+app.run(function ($rootScope, $location, ipCookie) {
+    $rootScope.$on('$routeChangeStart', function (event, next, current) {
+        if (next.requireAuth && !ipCookie('x-access-token')) {
+            $location.path('/login');
+        }
+
+        if (!next.requireAuth && ipCookie('x-access-token')) {
+            $location.path('/dashboard');
+        }
+    })
+});

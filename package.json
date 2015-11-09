@@ -3,6 +3,7 @@
   "main": "server.js",
   "dependencies": {
     "body-parser": "^1.0.2",
+    "cookie-parser": "^1.4.0",
     "express": "^4.0.0",
     "glob": "^5.0.15",
     "jsonwebtoken": "^5.4.0",

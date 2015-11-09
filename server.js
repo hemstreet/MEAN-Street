@@ -11,6 +11,7 @@ var express = require('express'),
     Model = require('./lib/model.js'),
     modellUtil = new Model(),
     passwordHash = require('password-hash'),
+    cookieParser = require('cookie-parser'),
     form = require('./lib/form.js');
 
 var BASELIB = __dirname + '/lib';
@@ -24,6 +25,7 @@ _models.then(function (models) {
     mongoose.connect(config.database);
     app.use(bodyParser.urlencoded({extend: true}));
     app.use(bodyParser.json());
+    app.use(cookieParser());
     app.use(morgan('dev'));
     app.use('/', express.static(__dirname + '/app'));
     app.use('/v1/rest', router);
@@ -50,7 +52,7 @@ _models.then(function (models) {
 
                             // @todo break out into helper method
                             var token = jwt.sign(user, config.secret, {
-                                expiresIn: config.tokenExpiration
+                                expiresIn: config.token.expiration
                             });
 
                             res.send({
@@ -92,7 +94,7 @@ _models.then(function (models) {
 
                 // @todo break out into helper method
                 var token = jwt.sign(model, config.secret, {
-                    expiresIn: config.tokenExpiration
+                    expiresIn: config.token.expiration
                 });
 
                 res.json({
@@ -107,7 +109,8 @@ _models.then(function (models) {
 
     router.use(function (req, res, next) {
 
-        var token = req.body.token || req.query.token || req.headers['x-access-token'];
+        console.log(req.cookies[config.token.name]);
+        var token = req.body.token || req.query.token || req.headers['x-access-token'] || req.cookies[config.token.name];
 
         if (token) {
             jwt.verify(token, config.secret, function (err, decoded) {
