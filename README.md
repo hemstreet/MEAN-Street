@@ -11,10 +11,11 @@ Make sure you run `bower install` inside of the `/app` folder
 
 Run `node server.js` and the server is set up!
 
+* [ ] Breakout functionality from server.js
 * [ ] Front End
 * [x] Authentication
 * [x] Password hashing
-* [ ] Register / Sign up
+* [x] Register / Sign up
 * [ ] Module loader
 * [x] Auto loader
 * [ ] Form render from Schema
