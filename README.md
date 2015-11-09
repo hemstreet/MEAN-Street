@@ -20,6 +20,7 @@ Run `node server.js` and youre server is setup!
 * [x] Dynamic routes
 * [ ] View Templates
 * [ ] Server prototype type instantiation for quick deploy `new Server({ port: 3001 }); 
+* [ ] implement /schema/:model route to dynamically get a models schema  
 
 
 Models
