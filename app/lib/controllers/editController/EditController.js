@@ -1,10 +1,8 @@
-angular.module('restServer').controller('EditController', ['$scope', 'modelService', function($scope, modelService) {
+angular.module('restServer').controller('EditController', ['$scope', 'httpService', function($scope, httpService) {
 
     var vm = this;
 
     vm.pageName = 'Edit Controller';
 
-    console.log('Edit Controller');
-
-    modelService.edit({});
+    //httpService.edit({});
 }]);

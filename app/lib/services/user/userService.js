@@ -1,10 +1,11 @@
-angular.module('restServer').service('userService', ['$http', 'config', '$q', 'ipCookie', function ($http, config, $q, ipCookie) {
+angular.module('restServer').service('userService', ['$http', 'config', '$q', 'ipCookie', 'httpService', function ($http, config, $q, ipCookie, httpService) {
 
     this.authenticate = function (data) {
         var defer = $q.defer();
 
         $http.post(config.baseUrl + '/authenticate', data).then(function(response) {
-            this.setCookie(config.token.name, response.data.token);
+            this.setCookie(config.token.name, response.data.token)
+            httpService.setToken(response.data.token);
             defer.resolve(response);
         }.bind(this), function(err) {
             defer.reject(err);
@@ -18,7 +19,10 @@ angular.module('restServer').service('userService', ['$http', 'config', '$q', 'i
         var defer = $q.defer();
 
         $http.post(config.baseUrl + '/signup', data).then(function(response) {
+
             this.setCookie(config.token.name, response.data.token);
+            httpService.setToken(response.data.token);
+
             defer.resolve(response);
         }.bind(this), function(err) {
             defer.reject(err);
