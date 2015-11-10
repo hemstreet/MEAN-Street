@@ -27,27 +27,17 @@ app.config(['$routeProvider', function($routeProvider) {
     controller:'DashboardController',
     controllerAs:'vm',
     requireAuth:true
-  }).when('/model/:model/create', {
+  }).when('/create/:model', {
     templateUrl:'views/list.html',
     controller:'ListController',
     controllerAs:'vm',
     requireAuth:true
-  }).when('/model/:name/read/:_id', {
+  }).when('/update/:name/:_id', {
     templateUrl:'views/edit.html',
     controller:'EditController',
     controllerAs:'vm',
     requireAuth:true
-  }).when('/model/:name/update/:_id', {
-    templateUrl:'views/edit.html',
-    controller:'EditController',
-    controllerAs:'vm',
-    requireAuth:true
-  }).when('/model/:model/delete/:_id', {
-    templateUrl:'views/list.html',
-    controller:'ListController',
-    controllerAs:'vm',
-    requireAuth:true
-  }).when('/model/:model/list', {
+  }).when('/list/:model', {
     templateUrl:'views/list.html',
     controller:'ListController',
     controllerAs:'vm',
