@@ -4,7 +4,6 @@ angular.module('restServer').service('userService', ['$http', 'config', '$q', 'i
         var defer = $q.defer();
 
         $http.post(config.baseUrl + '/authenticate', data).then(function(response) {
-            console.log(response);
             this.setCookie(config.token.name, response.data.token);
             defer.resolve(response);
         }.bind(this), function(err) {

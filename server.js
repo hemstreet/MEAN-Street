@@ -3,12 +3,13 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     mongoose = require('mongoose'),
     morgan = require('morgan'),
-    port = process.env.PORT || 8080,
+    port = process.env.PORT || 3000,
     router = express.Router(),
     config = require('./config/config'),
     Auth = require('./lib/Auth.js'),
     auth = new Auth(),
     _ = require('lodash'),
+    cookieParser = require('cookie-parser'),
     Model = require('./lib/Model.js'),
     modellUtil = new Model(),
     form = require('./lib/form.js');
@@ -47,7 +48,7 @@ _models.then(function (models) {
                         res.json({message: "Authentication failed. User not found", success: false});
                     }
                     else if (user) {
-                        if (auth.verify(user.password, user.password)) {
+                        if (auth.verify(req.body.password, user.password)) {
 
                             var token = auth.sign(user);
 
@@ -89,7 +90,7 @@ _models.then(function (models) {
                     res.send(err);
                 }
 
-                token = auth.sign(user);
+                token = auth.sign(model);
 
                 res.json({
                     success: true,
@@ -103,11 +104,11 @@ _models.then(function (models) {
 
     router.use(function (req, res, next) {
 
-        console.log(req.cookies[config.token.name]);
         var token = req.body.token || req.query.token || req.headers['x-access-token'] || req.cookies[config.token.name];
 
         if (token) {
-            jwt.verify(token, config.secret, function (err, decoded) {
+
+            auth.verify(token, config.secret, function (err, decoded) {
                 if (err) {
                     return res.send({
                         success: false,
