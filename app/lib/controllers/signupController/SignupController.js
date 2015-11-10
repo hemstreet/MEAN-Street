@@ -11,7 +11,10 @@ angular.module('restServer').controller('SignupController', ['$scope', 'userServ
             username: data.username,
             password: data.password
         }).then(function(data) {
-            vm.data = data
+            vm.data = data;
+
+            // @todo do proper redirect for dashboard
+            window.location.href = "#/dashboard";
         }, function(err) {
             vm.data = err;
             console.log('ERROR:', err);

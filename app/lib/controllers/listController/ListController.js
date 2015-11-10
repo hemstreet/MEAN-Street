@@ -4,5 +4,6 @@ angular.module('restServer').controller('ListController', ['$scope', function($s
 
     vm.pageName = 'List Controller';
 
-    console.log('List Controller');
+    vm.games = null;
+
 }]);
