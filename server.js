@@ -12,10 +12,7 @@ var express = require('express'),
     cookieParser = require('cookie-parser'),
     Model = require('./lib/Model.js'),
     modellUtil = new Model(),
-    form = require('./lib/form.js');
-
-
-var BASELIB = __dirname + '/lib';
+    BASELIB = __dirname + '/lib';
 
 app.set('models', BASELIB + '/models');
 
@@ -37,11 +34,15 @@ _models.then(function (models) {
     });
 
     // Include routes
-    require('./lib/routes.js')({
+    var routeOptions = {
         router: router,
         models: models,
-        auth: auth
-    });
+        auth: auth,
+        config: config
+    };
+
+    require('./lib/routes/auth.js')(routeOptions);
+    require('./lib/routes/crud.js')(routeOptions);
 
     app.listen(port);
 

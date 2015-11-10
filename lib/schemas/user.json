@@ -1,14 +1,14 @@
 {
   "username": {
-    "type": "String"
+    "type": "String",
+    "unique": true,
+    "required": true
   },
   "password": {
-    "type": "String"
+    "type": "String",
+    "required": true
   },
-  "admin": {
+  "_admin": {
     "type": "Boolean"
-  },
-  "testParam": {
-    "type": "String"
   }
 }
