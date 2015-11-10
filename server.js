@@ -11,15 +11,10 @@ var express = require('express'),
     _ = require('lodash'),
     cookieParser = require('cookie-parser'),
     Model = require('./lib/Model.js'),
-    modellUtil = new Model(),
-    BASELIB = __dirname + '/lib';
+    modellUtil = new Model();
 
-app.set('models', BASELIB + '/models');
 
-// Models
-var _models = modellUtil.getModels();
-
-_models.then(function (models) {
+modellUtil.getModels().then(function (models) {
 
     mongoose.connect(config.database);
     app.use(bodyParser.urlencoded({extend: true}));
