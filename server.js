@@ -5,13 +5,12 @@ var express = require('express'),
     morgan = require('morgan'),
     port = process.env.PORT || 8080,
     router = express.Router(),
-    jwt = require('jsonwebtoken'),
     config = require('./config/config'),
+    Auth = require('./lib/Auth.js'),
+    auth = new Auth(),
     _ = require('lodash'),
     Model = require('./lib/model.js'),
     modellUtil = new Model(),
-    passwordHash = require('password-hash'),
-    cookieParser = require('cookie-parser'),
     form = require('./lib/form.js');
 
 var BASELIB = __dirname + '/lib';
@@ -48,12 +47,9 @@ _models.then(function (models) {
                         res.json({message: "Authentication failed. User not found", success: false});
                     }
                     else if (user) {
-                        if (passwordHash.verify(req.body.password, user.password)) {
+                        if (auth.verify(user.password, user.password)) {
 
-                            // @todo break out into helper method
-                            var token = jwt.sign(user, config.secret, {
-                                expiresIn: config.token.expiration
-                            });
+                            var token = auth.sign(user);
 
                             res.send({
                                 success: true,
@@ -74,7 +70,8 @@ _models.then(function (models) {
 
             var Model = models['User'],
                 model = new Model(),
-                modelSchema = model.schema.paths;
+                modelSchema = model.schema.paths,
+                token = null;
 
             _.forEach(Object.keys(modelSchema), function (n) {
 
@@ -85,17 +82,14 @@ _models.then(function (models) {
                 }
             });
 
-            model.password = passwordHash.generate(req.body.password);
+            model.password = auth.generateHash(req.body.password);
 
             model.save(function (err) {
                 if (err) {
                     res.send(err);
                 }
 
-                // @todo break out into helper method
-                var token = jwt.sign(model, config.secret, {
-                    expiresIn: config.token.expiration
-                });
+                token = auth.sign(user);
 
                 res.json({
                     success: true,
@@ -133,6 +127,13 @@ _models.then(function (models) {
             });
         }
     });
+
+    // :model/create
+    // :model/edit/:_id
+    // :model/update/:_id
+    // :model/delete/:_id
+    // :model/view/:_id
+    // :model/list
 
     router.route('/:model/:_id')
         .get(function (req, res) {

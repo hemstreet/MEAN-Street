@@ -29,7 +29,7 @@ angular.module('restServer').service('userService', ['$http', 'config', '$q', 'i
     };
 
     this.logout = function() {
-        this.setCookie(config.token.name, null);
+        ipCookie.remove(config.token.name);
         window.location.href = "/";
     };
 
@@ -37,5 +37,5 @@ angular.module('restServer').service('userService', ['$http', 'config', '$q', 'i
         ipCookie(name, value, {
             expires: config.token.expiration
         });
-    }
+    };
 }]);

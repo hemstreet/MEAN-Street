@@ -1,8 +1,5 @@
-angular.module('restServer').controller('DashboardController', ['$scope', 'userService', function($scope, userService) {
+angular.module('restServer').controller('DashboardController', ['$scope', function($scope) {
 
     var vm = this;
 
-    vm.logoutUser = function() {
-        userService.logout();
-    };
 }]);
