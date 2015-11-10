@@ -9,7 +9,7 @@ var express = require('express'),
     Auth = require('./lib/Auth.js'),
     auth = new Auth(),
     _ = require('lodash'),
-    Model = require('./lib/model.js'),
+    Model = require('./lib/Model.js'),
     modellUtil = new Model(),
     form = require('./lib/form.js');
 
