@@ -11,7 +11,7 @@ Make sure you run `bower install` inside of the `/app` folder
 
 Run `node server.js` and the server is set up!
 
-* [ ] Breakout functionality from server.js
+* [x] Breakout functionality from server.js
 * [ ] move /lib/*.js files to a better place
 * [ ] Front End
 * [x] Authentication
