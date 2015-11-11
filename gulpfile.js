@@ -3,7 +3,7 @@ var gulp = require('gulp'),
 
 var assetsDir = 'app/assets';
 
-gulp.task('server', function () {
+gulp.task('default', function () {
     nodemon({
         script: 'server.js'
         , ext: 'js html'
