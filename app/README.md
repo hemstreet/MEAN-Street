@@ -2,6 +2,8 @@
 * [ ] Move logout out of DashboardController.js
 * [ ] Integrate logout
 * [ ] Fix hardcoded list controller to read the routes
+* [ ] Dynamic dashboard links
+* [ ] Authorized templates ( behind authentication ) vs Non Authorized templates
 
 Possible Admin Themes
 ===
