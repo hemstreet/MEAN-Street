@@ -4,6 +4,7 @@ var express = require('express'),
     mongoose = require('mongoose'),
     morgan = require('morgan'),
     port = process.env.PORT || 3000,
+    env = process.env.ENV || 'dev',
     router = express.Router(),
     config = require('./config/config'),
     Auth = require('./lib/Auth.js'),
@@ -11,16 +12,15 @@ var express = require('express'),
     _ = require('lodash'),
     cookieParser = require('cookie-parser'),
     Model = require('./lib/Model.js'),
-    modellUtil = new Model();
+    modelUtil = new Model();
 
-
-modellUtil.getModels().then(function (models) {
+modelUtil.getModels().then(function (models) {
 
     mongoose.connect(config.database);
     app.use(bodyParser.urlencoded({extend: true}));
     app.use(bodyParser.json());
     app.use(cookieParser());
-    app.use(morgan('dev'));
+    app.use(morgan(env));
     app.use('/', express.static(__dirname + '/app'));
     app.use('/v1/rest', router);
 
