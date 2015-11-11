@@ -1,8 +1,6 @@
 var gulp = require('gulp'),
     nodemon = require('gulp-nodemon');
 
-var assetsDir = 'app/assets';
-
 gulp.task('default', function () {
     nodemon({
         script: 'server.js'

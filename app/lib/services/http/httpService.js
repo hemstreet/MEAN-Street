@@ -56,8 +56,6 @@ angular.module('restServer').service('httpService', ['$http', 'config', '$q', fu
   this.list = function(options) {
     var defer = $q.defer();
 
-    console.log(options);
-
     $http.get(config.baseUrl + '/list/' + options.model).then(function(response) {
       defer.resolve(response);
     }.bind(this), function(err) {
