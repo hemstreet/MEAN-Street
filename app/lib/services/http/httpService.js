@@ -1,14 +1,5 @@
 angular.module('restServer').service('httpService', ['$http', 'config', '$q', function($http, config, $q) {
 
-  this.token = null;
-
-  this.setToken = function(token) {
-    this.token = token;
-  }
-  this.getHeaders = function() {
-
-  };
-
   this.create = function(options) {
 
     var defer = $q.defer();
@@ -49,7 +40,7 @@ angular.module('restServer').service('httpService', ['$http', 'config', '$q', fu
     return defer.promise;
   };
 
-  this.delete = function() {
+  this.delete = function(options) {
     var defer = $q.defer();
 
     $http.delete(config.baseUrl + '/update/' + options.model + '/' + options._id).then(function(response) {
@@ -62,8 +53,10 @@ angular.module('restServer').service('httpService', ['$http', 'config', '$q', fu
 
   };
 
-  this.list = function() {
+  this.list = function(options) {
     var defer = $q.defer();
+
+    console.log(options);
 
     $http.get(config.baseUrl + '/list/' + options.model).then(function(response) {
       defer.resolve(response);
