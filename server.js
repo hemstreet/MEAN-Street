@@ -12,11 +12,15 @@ var express = require('express'),
     _ = require('lodash'),
     cookieParser = require('cookie-parser'),
     Model = require('./lib/Model.js'),
-    modelUtil = new Model();
+    modelUtil = new Model(),
+    Db = require('./lib/Database.js'),
+    db = new Db({
+        db: mongoose
+    });
 
 modelUtil.getModels().then(function (models) {
 
-    mongoose.connect(config.database);
+    db.connect(config.database);
     app.use(bodyParser.urlencoded({extend: true}));
     app.use(bodyParser.json());
     app.use(cookieParser());
@@ -38,6 +42,7 @@ modelUtil.getModels().then(function (models) {
 
     require('./lib/routes/auth.js')(routeOptions);
     require('./lib/routes/crud.js')(routeOptions);
+    require('./lib/routes/model.js')(routeOptions);
 
     app.listen(port);
 

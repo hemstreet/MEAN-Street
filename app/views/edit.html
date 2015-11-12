@@ -1,3 +1,11 @@
 {{vm.pageName}}
 <br/><br/>
-Edit form here
+
+<form role="form">
+    <fieldset>
+        <div class="form-group" ng-repeat="field in vm.modelFields">
+            <input ng-model="model[field.name]" class="form-control" placeholder="field.placeholder" name="field.name" type="field.type" autofocus>
+        </div>
+        <a href="#" class="btn btn-lg btn-success btn-block" ng-click="vm.editModel(model)">Save</a>
+    </fieldset>
+</form>

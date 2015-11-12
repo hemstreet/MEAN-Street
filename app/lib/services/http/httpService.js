@@ -4,7 +4,7 @@ angular.module('restServer').service('httpService', ['$http', 'config', '$q', fu
 
     var defer = $q.defer();
 
-    $http.post(config.baseUrl + '/create/' + options.model + '/', options.data).then(function(response) {
+    $http.post(config.baseUrl + '/create/' + options.modelName + '/', options.data).then(function(response) {
       defer.resolve(response);
     }.bind(this), function(err) {
       defer.reject(err);
@@ -18,7 +18,7 @@ angular.module('restServer').service('httpService', ['$http', 'config', '$q', fu
 
     var defer = $q.defer();
 
-    $http.get(config.baseUrl + '/read/' + options.model + '/' + options._id).then(function(response) {
+    $http.get(config.baseUrl + '/read/' + options.modelName + '/' + options._id).then(function(response) {
       defer.resolve(response);
     }.bind(this), function(err) {
       defer.reject(err);
@@ -31,7 +31,7 @@ angular.module('restServer').service('httpService', ['$http', 'config', '$q', fu
   this.update = function(options) {
     var defer = $q.defer();
 
-    $http.put(config.baseUrl + '/update/' + options.model + '/' + options._id, options.data).then(function(response) {
+    $http.put(config.baseUrl + '/update/' + options.modelName + '/' + options._id, options.data).then(function(response) {
       defer.resolve(response);
     }.bind(this), function(err) {
       defer.reject(err);
@@ -43,7 +43,7 @@ angular.module('restServer').service('httpService', ['$http', 'config', '$q', fu
   this.delete = function(options) {
     var defer = $q.defer();
 
-    $http.delete(config.baseUrl + '/update/' + options.model + '/' + options._id).then(function(response) {
+    $http.delete(config.baseUrl + '/update/' + options.modelName + '/' + options._id).then(function(response) {
       defer.resolve(response);
     }.bind(this), function(err) {
       defer.reject(err);
@@ -56,13 +56,25 @@ angular.module('restServer').service('httpService', ['$http', 'config', '$q', fu
   this.list = function(options) {
     var defer = $q.defer();
 
-    $http.get(config.baseUrl + '/list/' + options.model).then(function(response) {
+    $http.get(config.baseUrl + '/list/' + options.modelName).then(function(response) {
       defer.resolve(response);
     }.bind(this), function(err) {
       defer.reject(err);
     });
 
     return defer.promise;
-  }
+  };
+
+  this.getModelSchema = function(options) {
+    var defer = $q.defer();
+
+    $http.get(config.baseUrl + '/schema/' + options.modelName).then(function(response) {
+      defer.resolve(response.data);
+    }.bind(this), function(err) {
+      defer.reject(err);
+    });
+
+    return defer.promise;
+  };
 
 }]);

@@ -6,7 +6,7 @@ angular.module('restServer').controller('ListController', ['$scope', '$routePara
 
     var modelName = $routeParams.model;
     httpService.list({
-        model: modelName
+        modelName: modelName
     }).then(function(response) {
         vm.modelName = modelName;
         vm.models = response.data;
