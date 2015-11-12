@@ -1,9 +1,9 @@
 * [ ] Fix redirect to #/dashboard in SignupController.js
-* [ ] Move logout out of DashboardController.js
 * [ ] Integrate logout
 * [ ] Fix hardcoded list controller to read the routes
 * [ ] Dynamic dashboard links
 * [ ] Authorized templates ( behind authentication ) vs Non Authorized templates
+* [ ] Clean up modelListDirective.js variables being passed in to one main variable
 
 Admin Theme
 ===

@@ -1,4 +1,4 @@
-angular.module('restServer').directive('modelList', [function() {
+angular.module('restServer').directive('modelList', [function () {
     return {
         restrict: 'E',
         scope: {

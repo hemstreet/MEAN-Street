@@ -1,4 +1,4 @@
-angular.module('restServer').controller('DashboardController', ['$scope', function($scope) {
+angular.module('restServer').controller('DashboardController', ['$scope', function ($scope) {
 
     var vm = this;
 

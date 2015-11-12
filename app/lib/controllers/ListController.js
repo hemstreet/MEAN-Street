@@ -1,4 +1,4 @@
-angular.module('restServer').controller('ListController', ['$scope', '$routeParams', 'httpService', function($scope, $routeParams, httpService) {
+angular.module('restServer').controller('ListController', ['$scope', '$routeParams', 'httpService', function ($scope, $routeParams, httpService) {
 
     var vm = this;
 
@@ -9,35 +9,35 @@ angular.module('restServer').controller('ListController', ['$scope', '$routePara
 
     httpService.getModelFields({
         modelName: modelName
-    }).then(function(fields) {
-            vm.fields = fields;
+    }).then(function (fields) {
+        vm.fields = fields;
     });
 
     httpService.list({
         modelName: modelName
-    }).then(function(response) {
+    }).then(function (response) {
         vm.modelName = modelName;
         vm.models = response.data;
     });
 
-    this.editModel = function(_id) {
+    this.editModel = function (_id) {
         console.log('edit', _id);
     };
 
-    this.deleteModel = function(_id) {
+    this.deleteModel = function (_id) {
         httpService.delete({
             modelName: modelName,
             _id: _id
-        }).then(function(response) {
+        }).then(function (response) {
             angular.element.find('.' + _id)[0].remove();
-        }, function(err) {
+        }, function (err) {
             console.log(err)
         });
 
         console.log('delete', _id);
     };
 
-    this.createModel = function(model) {
+    this.createModel = function (model) {
         console.log('create', model);
 
     };

@@ -1,4 +1,4 @@
-angular.module('restServer').controller('EditController', ['$routeParams', 'httpService', function($routeParams, httpService) {
+angular.module('restServer').controller('EditController', ['$routeParams', 'httpService', function ($routeParams, httpService) {
 
     var vm = this;
 
@@ -10,21 +10,21 @@ angular.module('restServer').controller('EditController', ['$routeParams', 'http
 
     httpService.getModelSchema({
         modelName: modelName
-    }).then(function(data) {
+    }).then(function (data) {
         vm.modelSchema = data;
-    }, function(err){
+    }, function (err) {
         vm.err = err;
     });
 
-    vm.editModel = function(data) {
+    vm.editModel = function (data) {
         httpService.update({
             modelName: modelName,
             id: _id,
             data: data
 
-        }).then(function(response) {
+        }).then(function (response) {
 
-        }, function(err) {
+        }, function (err) {
             vm.error = err;
         });
     }

@@ -1,92 +1,92 @@
-angular.module('restServer').service('httpService', ['$http', 'config', '$q', function($http, config, $q) {
+angular.module('restServer').service('httpService', ['$http', 'config', '$q', function ($http, config, $q) {
 
-  this.create = function(options) {
+    this.create = function (options) {
 
-    var defer = $q.defer();
+        var defer = $q.defer();
 
-    $http.post(config.baseUrl + '/create/' + options.modelName + '/', options.data).then(function(response) {
-      defer.resolve(response);
-    }.bind(this), function(err) {
-      defer.reject(err);
-    });
+        $http.post(config.baseUrl + '/create/' + options.modelName + '/', options.data).then(function (response) {
+            defer.resolve(response);
+        }.bind(this), function (err) {
+            defer.reject(err);
+        });
 
-    return defer.promise;
+        return defer.promise;
 
-  };
+    };
 
-  this.read = function(options) {
+    this.read = function (options) {
 
-    var defer = $q.defer();
+        var defer = $q.defer();
 
-    $http.get(config.baseUrl + '/read/' + options.modelName + '/' + options._id).then(function(response) {
-      defer.resolve(response);
-    }.bind(this), function(err) {
-      defer.reject(err);
-    });
+        $http.get(config.baseUrl + '/read/' + options.modelName + '/' + options._id).then(function (response) {
+            defer.resolve(response);
+        }.bind(this), function (err) {
+            defer.reject(err);
+        });
 
-    return defer.promise;
+        return defer.promise;
 
-  };
+    };
 
-  this.update = function(options) {
-    var defer = $q.defer();
+    this.update = function (options) {
+        var defer = $q.defer();
 
-    $http.put(config.baseUrl + '/update/' + options.modelName + '/' + options._id, options.data).then(function(response) {
-      defer.resolve(response);
-    }.bind(this), function(err) {
-      defer.reject(err);
-    });
+        $http.put(config.baseUrl + '/update/' + options.modelName + '/' + options._id, options.data).then(function (response) {
+            defer.resolve(response);
+        }.bind(this), function (err) {
+            defer.reject(err);
+        });
 
-    return defer.promise;
-  };
+        return defer.promise;
+    };
 
-  this.delete = function(options) {
-    var defer = $q.defer();
+    this.delete = function (options) {
+        var defer = $q.defer();
 
-    $http.delete(config.baseUrl + '/delete/' + options.modelName + '/' + options._id).then(function(response) {
-      defer.resolve(response);
-    }.bind(this), function(err) {
-      defer.reject(err);
-    });
+        $http.delete(config.baseUrl + '/delete/' + options.modelName + '/' + options._id).then(function (response) {
+            defer.resolve(response);
+        }.bind(this), function (err) {
+            defer.reject(err);
+        });
 
-    return defer.promise;
+        return defer.promise;
 
-  };
+    };
 
-  this.list = function(options) {
-    var defer = $q.defer();
+    this.list = function (options) {
+        var defer = $q.defer();
 
-    $http.get(config.baseUrl + '/list/' + options.modelName).then(function(response) {
-      defer.resolve(response);
-    }.bind(this), function(err) {
-      defer.reject(err);
-    });
+        $http.get(config.baseUrl + '/list/' + options.modelName).then(function (response) {
+            defer.resolve(response);
+        }.bind(this), function (err) {
+            defer.reject(err);
+        });
 
-    return defer.promise;
-  };
+        return defer.promise;
+    };
 
-  this.getModelSchema = function(options) {
-    var defer = $q.defer();
+    this.getModelSchema = function (options) {
+        var defer = $q.defer();
 
-    $http.get(config.baseUrl + '/schema/' + options.modelName).then(function(response) {
-      defer.resolve(response.data.schema);
-    }.bind(this), function(err) {
-      defer.reject(err);
-    });
+        $http.get(config.baseUrl + '/schema/' + options.modelName).then(function (response) {
+            defer.resolve(response.data.schema);
+        }.bind(this), function (err) {
+            defer.reject(err);
+        });
 
-    return defer.promise;
-  };
+        return defer.promise;
+    };
 
-  this.getModelFields = function(options) {
-    var defer = $q.defer();
+    this.getModelFields = function (options) {
+        var defer = $q.defer();
 
-    $http.get(config.baseUrl + '/fields/' + options.modelName).then(function(response) {
-      defer.resolve(response.data.fields);
-    }.bind(this), function(err) {
-      defer.reject(err);
-    });
+        $http.get(config.baseUrl + '/fields/' + options.modelName).then(function (response) {
+            defer.resolve(response.data.fields);
+        }.bind(this), function (err) {
+            defer.reject(err);
+        });
 
-    return defer.promise;
-  };
+        return defer.promise;
+    };
 
 }]);

@@ -7,8 +7,8 @@ gulp.task('default', function () {
         , ext: 'js html json'
         , env: {
             'NODE_ENV': 'development',
-            'ENV' : 'dev',
-            'PORT' : 3000
+            'ENV': 'dev',
+            'PORT': 3000
         }
     })
 });

@@ -1,4 +1,4 @@
-angular.module('restServer').controller('LoginController', ['$scope', 'userService', '$location', function($scope, userService, $location) {
+angular.module('restServer').controller('LoginController', ['$scope', 'userService', '$location', function ($scope, userService, $location) {
 
     var vm = this;
 
@@ -6,13 +6,13 @@ angular.module('restServer').controller('LoginController', ['$scope', 'userServi
 
     vm.data = null;
 
-    vm.loginUser = function(data) {
+    vm.loginUser = function (data) {
         userService.authenticate({
             username: data.username,
             password: data.password
-        }).then(function(data) {
+        }).then(function (data) {
             $location.path('/dashboard');
-        }, function(err) {
+        }, function (err) {
             vm.error = err;
         });
     };
