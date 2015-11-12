@@ -6,7 +6,8 @@
     </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="model in models" ng-class-odd="'odd'" ng-class-even="'even'" class="gradeX">
+
+    <tr ng-repeat="model in models" ng-class="model._id" ng-class-odd="'odd'" ng-class-even="'even'" class="gradeX">
         <td ng-repeat="field in fields">{{model[field]}}</td>
         <td class="center">
             <button ng-click="controller.editModel(model._id)" type="button" class="btn btn-warning">Edit</button>

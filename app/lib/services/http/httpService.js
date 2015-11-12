@@ -43,7 +43,7 @@ angular.module('restServer').service('httpService', ['$http', 'config', '$q', fu
   this.delete = function(options) {
     var defer = $q.defer();
 
-    $http.delete(config.baseUrl + '/update/' + options.modelName + '/' + options._id).then(function(response) {
+    $http.delete(config.baseUrl + '/delete/' + options.modelName + '/' + options._id).then(function(response) {
       defer.resolve(response);
     }.bind(this), function(err) {
       defer.reject(err);
