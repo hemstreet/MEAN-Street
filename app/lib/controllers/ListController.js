@@ -20,8 +20,8 @@ angular.module('restServer').controller('ListController', ['$scope', '$routePara
         vm.models = response.data;
     });
 
-    this.editModel = function (_id) {
-        console.log('edit', _id);
+    this.editModel = function (_id, data) {
+        console.log('edit', _id, data);
     };
 
     this.deleteModel = function (_id) {
@@ -34,7 +34,6 @@ angular.module('restServer').controller('ListController', ['$scope', '$routePara
             console.log(err)
         });
 
-        console.log('delete', _id);
     };
 
     this.createModel = function (model) {

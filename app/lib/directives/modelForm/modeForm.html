@@ -1,0 +1,8 @@
+<form role="form">
+    <fieldset ng-model="form">
+        <div class="form-group" ng-repeat="field in fields">
+            <input ng-model="form[field]" class="form-control" placeholder="{{field}}" name="{{field}}" type="{{schema[field].fieldType}}" autofocus>
+        </div>
+        <a href="#" class="btn btn-lg btn-success btn-block" ng-click="controller.editModel(modelId, form)">Save</a>
+    </fieldset>
+</form>

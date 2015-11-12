@@ -2,11 +2,23 @@ angular.module('restServer').controller('EditController', ['$routeParams', 'http
 
     var vm = this;
 
+    var modelName = $routeParams.model,
+        _id = $routeParams._id;
+
     vm.pageName = 'Edit Controller';
     vm.modelFields = null;
 
-    var modelName = $routeParams.model,
-        _id = _id;
+    vm.modelName = modelName;
+    vm.modelId = _id;
+
+    httpService.getModelFields({
+        modelName: modelName,
+        protected: true
+    }).then(function (data) {
+        vm.fields = data
+    }, function (err) {
+        vm.err = err;
+    });
 
     httpService.getModelSchema({
         modelName: modelName
@@ -16,7 +28,9 @@ angular.module('restServer').controller('EditController', ['$routeParams', 'http
         vm.err = err;
     });
 
-    vm.editModel = function (data) {
+    vm.editModel = function (_id, data) {
+
+        console.log(_id, data);
         httpService.update({
             modelName: modelName,
             id: _id,

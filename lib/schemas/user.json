@@ -1,10 +1,12 @@
 {
   "username": {
     "type": "String",
-    "unique": true
+    "unique": true,
+    "fieldType" : "text"
   },
   "password": {
-    "type": "String"
+    "type": "String",
+    "fieldType" : "password"
   },
   "_admin": {
     "type": "Boolean"

@@ -1,4 +1,4 @@
-angular.module('restServer').service('httpService', ['$http', 'config', '$q', function ($http, config, $q) {
+angular.module('restServer').service('httpService', ['$http', 'config', '$q', 'modelService', function ($http, config, $q, modelService) {
 
     this.create = function (options) {
 
@@ -81,12 +81,20 @@ angular.module('restServer').service('httpService', ['$http', 'config', '$q', fu
         var defer = $q.defer();
 
         $http.get(config.baseUrl + '/fields/' + options.modelName).then(function (response) {
-            defer.resolve(response.data.fields);
+            var fields = response.data.fields;
+
+            if(options.protected) {
+                fields = modelService.stripProtected(fields);
+            }
+
+            defer.resolve(fields);
+
         }.bind(this), function (err) {
             defer.reject(err);
         });
 
         return defer.promise;
     };
+
 
 }]);

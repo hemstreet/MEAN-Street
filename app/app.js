@@ -32,7 +32,7 @@ app.config(['$routeProvider', function ($routeProvider) {
         controller: 'ListController',
         controllerAs: 'vm',
         requireAuth: true
-    }).when('/update/:model/:_id', {
+    }).when('/edit/:model/:_id', {
         templateUrl: 'views/edit.html',
         controller: 'EditController',
         controllerAs: 'vm',
