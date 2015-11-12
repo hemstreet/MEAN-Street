@@ -3,8 +3,16 @@ angular.module('restServer').controller('ListController', ['$scope', '$routePara
     var vm = this;
 
     vm.pageName = 'List Controller';
+    vm.fields = null;
 
     var modelName = $routeParams.model;
+
+    httpService.getModelFields({
+        modelName: modelName
+    }).then(function(fields) {
+            vm.fields = fields;
+    });
+
     httpService.list({
         modelName: modelName
     }).then(function(response) {

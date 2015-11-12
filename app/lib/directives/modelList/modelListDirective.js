@@ -4,8 +4,10 @@ angular.module('restServer').directive('modelList', [function() {
         scope: {
             models: '=',
             controller: '=',
-            modelName: '='
+            modelName: '=',
+            fields: '='
         },
+
         templateUrl: './lib/directives/modelList/modelList.html'
     }
 }]);

@@ -77,4 +77,16 @@ angular.module('restServer').service('httpService', ['$http', 'config', '$q', fu
     return defer.promise;
   };
 
+  this.getModelFields = function(options) {
+    var defer = $q.defer();
+
+    $http.get(config.baseUrl + '/fields/' + options.modelName).then(function(response) {
+      defer.resolve(response.data.fields);
+    }.bind(this), function(err) {
+      defer.reject(err);
+    });
+
+    return defer.promise;
+  };
+
 }]);
