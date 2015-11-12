@@ -25,9 +25,8 @@ modelUtil.getModels().then(function (models) {
     app.use(bodyParser.json());
     app.use(cookieParser());
     app.use(morgan(env));
-    app.use('/', express.static(__dirname + '/app'));
     app.use('/v1/rest', router);
-
+    app.use('/', express.static(__dirname + '/app'));
     app.get('/', function (req, res) {
         res.sendFile('/index.html');
     });
@@ -40,7 +39,13 @@ modelUtil.getModels().then(function (models) {
         config: config
     };
 
+    // Public routes
+    require('./lib/routes/public.js')(routeOptions);
+
+    // Initialize authorization
     require('./lib/routes/auth.js')(routeOptions);
+
+    // Private routes
     require('./lib/routes/crud.js')(routeOptions);
     require('./lib/routes/model.js')(routeOptions);
 

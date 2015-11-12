@@ -4,7 +4,7 @@ var gulp = require('gulp'),
 gulp.task('default', function () {
     nodemon({
         script: 'server.js'
-        , ext: 'js html'
+        , ext: 'js html json'
         , env: {
             'NODE_ENV': 'development',
             'ENV' : 'dev',

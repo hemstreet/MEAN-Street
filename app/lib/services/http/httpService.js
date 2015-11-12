@@ -69,7 +69,7 @@ angular.module('restServer').service('httpService', ['$http', 'config', '$q', fu
     var defer = $q.defer();
 
     $http.get(config.baseUrl + '/schema/' + options.modelName).then(function(response) {
-      defer.resolve(response.data);
+      defer.resolve(response.data.schema);
     }.bind(this), function(err) {
       defer.reject(err);
     });
