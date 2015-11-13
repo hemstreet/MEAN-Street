@@ -9,13 +9,16 @@ angular.module('restServer').directive('modelForm', ['httpService', function (ht
         controller: function ($scope) {
             $scope.submitForm = function () {
 
-                // Map our form values to our current model incase any values are missing
-                angular.extend($scope.model.modelData, $scope.model.formData);
+                var fieldData = $scope.model.formData;
+                if($scope.model.modelData && $scope.model.formData) {
+                    // Map our form values to our current model incase any values are missing
+                    fieldData = angular.extend({}, $scope.model.modelData, $scope.model.formData);
+                }
 
                 var options = {
                     _id: $scope.model._id,
                     modelName: $scope.model.modelName,
-                    data: $scope.model.modelData
+                    data: fieldData
                 };
 
                 httpService[$scope.action](options)
