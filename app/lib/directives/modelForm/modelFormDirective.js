@@ -9,10 +9,13 @@ angular.module('restServer').directive('modelForm', ['httpService', function (ht
         templateUrl: './lib/directives/modelForm/modelForm.html',
         controller: function ($scope) {
             $scope.submitForm = function () {
+
+                angular.extend($scope.model.modelData, $scope.model.formData);
+
                 var options = {
                     _id: $scope.model._id,
                     modelName: $scope.model.modelName,
-                    data: $scope.model.formData
+                    data: $scope.model.modelData
                 };
 
                 httpService[$scope.action](options)

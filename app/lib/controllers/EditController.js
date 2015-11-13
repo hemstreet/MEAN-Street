@@ -12,7 +12,7 @@ angular.module('restServer').controller('EditController', ['$routeParams', 'http
         _id: _id,
         fields: null,
         schema: null,
-        modelData: null
+        data: null
     };
 
     httpService.read({
