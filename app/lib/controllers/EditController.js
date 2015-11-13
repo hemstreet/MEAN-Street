@@ -1,21 +1,34 @@
 angular.module('restServer').controller('EditController', ['$routeParams', 'httpService', function ($routeParams, httpService) {
 
-    var vm = this;
-
-    var modelName = $routeParams.model,
+    var vm = this,
+        modelName = $routeParams.model,
         _id = $routeParams._id;
 
     vm.pageName = 'Edit Controller';
-    vm.modelFields = null;
+    vm.action = 'update';
 
-    vm.modelName = modelName;
-    vm.modelId = _id;
+    vm.model = {
+        modelName: modelName,
+        _id: _id,
+        fields: null,
+        schema: null,
+        modelData: null
+    };
+
+    httpService.read({
+        modelName: modelName,
+        _id: _id
+    }).then(function (response) {
+        vm.model.modelData = response.data
+    }, function (err) {
+        vm.err = err;
+    });
 
     httpService.getModelFields({
         modelName: modelName,
         protected: true
     }).then(function (data) {
-        vm.fields = data
+        vm.model.fields = data
     }, function (err) {
         vm.err = err;
     });
@@ -23,24 +36,9 @@ angular.module('restServer').controller('EditController', ['$routeParams', 'http
     httpService.getModelSchema({
         modelName: modelName
     }).then(function (data) {
-        vm.modelSchema = data;
+        vm.model.schema = data;
     }, function (err) {
         vm.err = err;
     });
-
-    vm.editModel = function (_id, data) {
-
-        console.log(_id, data);
-        httpService.update({
-            modelName: modelName,
-            id: _id,
-            data: data
-
-        }).then(function (response) {
-
-        }, function (err) {
-            vm.error = err;
-        });
-    }
 
 }]);

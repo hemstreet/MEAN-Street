@@ -2,11 +2,13 @@
   "username": {
     "type": "String",
     "unique": true,
+    "placeholder" : "Username",
     "fieldType" : "text"
   },
   "password": {
     "type": "String",
-    "fieldType" : "password"
+    "fieldType" : "password",
+    "placeholder" : "Password"
   },
   "_admin": {
     "type": "Boolean"

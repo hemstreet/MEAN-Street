@@ -1,9 +1,11 @@
 <form role="form">
     <fieldset>
-        <div class="form-group" ng-repeat="field in fields">
-            <input ng-model="formData[field]" class="form-control" placeholder="{{field}}" name="{{field}}" type="{{schema[field].fieldType}}" autofocus>
+        <div class="form-group" ng-repeat="field in model.fields">
+            <input class="form-control" ng-model="formData[field]" ng-value="model.modelData[field]" placeholder="{{model.schema[field].placeholder || field }}" name="{{field}}" type="{{model.schema[field].fieldType}}" autofocus>
         </div>
-        <a class="btn btn-lg btn-success btn-block" ng-click="submitForm(modelName, modelId, formData)">Save</a>
+
+        <input type="submit" id="submit" class="btn btn-lg btn-success btn-block" value="Submit" ng-click="submitForm(formData)"/>
     </fieldset>
 </form>
+
 {{response}}
