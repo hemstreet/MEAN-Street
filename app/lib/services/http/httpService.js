@@ -65,6 +65,18 @@ angular.module('restServer').service('httpService', ['$http', 'config', '$q', 'm
         return defer.promise;
     };
 
+    this.getModels = function() {
+        var defer = $q.defer();
+
+        $http.get(config.baseUrl + '/models').then(function(response) {
+
+            defer.resolve(response.data);
+
+        });
+
+        return defer.promise;
+    };
+
     this.getModelSchema = function (options) {
         var defer = $q.defer();
 

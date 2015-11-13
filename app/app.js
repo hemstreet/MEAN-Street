@@ -31,8 +31,8 @@ app.config(['$routeProvider', function ($routeProvider) {
         controllerAs: 'vm',
         requireAuth: true
     }).when('/create/:model', {
-        templateUrl: 'views/list.html',
-        controller: 'ListController',
+        templateUrl: 'views/create.html',
+        controller: 'CreateController',
         controllerAs: 'vm',
         requireAuth: true
     }).when('/edit/:model/:_id', {

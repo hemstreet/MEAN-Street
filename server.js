@@ -12,13 +12,13 @@ var express = require('express'),
     _ = require('lodash'),
     cookieParser = require('cookie-parser'),
     Model = require('./lib/Model.js'),
-    modelUtil = new Model(),
+    model = new Model(),
     Db = require('./lib/Database.js'),
     db = new Db({
         db: mongoose
     });
 
-modelUtil.getModels().then(function (models) {
+model.getModels().then(function (models) {
 
     db.connect(config.database);
     app.use(bodyParser.urlencoded({extend: true}));

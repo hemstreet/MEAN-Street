@@ -12,18 +12,34 @@ angular.module('restServer').directive('modelForm', ['httpService', function (ht
         templateUrl: './lib/directives/modelForm/modeForm.html',
         controller: function ($scope) {
 
-            // Update action to be for edit vs create
-            $scope.formData = [];
             $scope.submitForm = function (modelName, _id, data) {
-                httpService.update({
+                var options = {
                     modelName: modelName,
-                    _id: _id,
                     data: data
-                }).then(function(response) {
-                    $scope.response = response.data.message;
-                }, function(err) {
-                    $scope.response = err
-                });
+                };
+
+                if($scope.action == 'edit') {
+
+                    options._id = _id;
+
+                    httpService.update(options)
+                        .then(function(response) {
+                            $scope.response = response.data.message;
+                        }, function(err) {
+                            console.log('update');
+                            $scope.response = err
+                        });
+                }
+                else
+                {
+                    httpService.create(options)
+                        .then(function(response) {
+                            console.log(response);
+                        }, function(err) {
+                            console.log('create');
+                            console.log(err);
+                        })
+                }
             };
         }
     }
