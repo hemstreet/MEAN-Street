@@ -4,7 +4,9 @@
 * [ ] Dynamic dashboard links
 * [ ] Authorized templates ( behind authentication ) vs Non Authorized templates
 * [ ] Clean up modelListDirective.js variables being passed in to one main variable
-* [ ] Unbind modelFormDirective from EditController
+* [x] Unbind modelFormDirective from EditController
+* [ ] Fix 404 error handling
+* [ ] Fix login page when submitting an empty login field `Cannot read property 'username' of undefined`
 
 Admin Theme
 ===

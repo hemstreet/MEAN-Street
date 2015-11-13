@@ -8,7 +8,8 @@
   "password": {
     "type": "String",
     "fieldType" : "password",
-    "placeholder" : "Password"
+    "placeholder" : "Password",
+    "hidden" : true
   },
   "_admin": {
     "type": "Boolean"
