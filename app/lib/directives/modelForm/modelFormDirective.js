@@ -3,13 +3,13 @@ angular.module('restServer').directive('modelForm', ['httpService', function (ht
         restrict: 'E',
         scope: {
             model: '=',
-            modelData: '=',
             action: '='
         },
         templateUrl: './lib/directives/modelForm/modelForm.html',
         controller: function ($scope) {
             $scope.submitForm = function () {
 
+                // Map our form values to our current model incase any values are missing
                 angular.extend($scope.model.modelData, $scope.model.formData);
 
                 var options = {
