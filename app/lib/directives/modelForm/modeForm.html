@@ -1,8 +1,9 @@
 <form role="form">
-    <fieldset ng-model="form">
+    <fieldset>
         <div class="form-group" ng-repeat="field in fields">
-            <input ng-model="form[field]" class="form-control" placeholder="{{field}}" name="{{field}}" type="{{schema[field].fieldType}}" autofocus>
+            <input ng-model="formData[field]" class="form-control" placeholder="{{field}}" name="{{field}}" type="{{schema[field].fieldType}}" autofocus>
         </div>
-        <a href="#" class="btn btn-lg btn-success btn-block" ng-click="controller.editModel(modelId, form)">Save</a>
+        <a class="btn btn-lg btn-success btn-block" ng-click="submitForm(modelName, modelId, formData)">Save</a>
     </fieldset>
 </form>
+{{response}}

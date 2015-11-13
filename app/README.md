@@ -4,6 +4,7 @@
 * [ ] Dynamic dashboard links
 * [ ] Authorized templates ( behind authentication ) vs Non Authorized templates
 * [ ] Clean up modelListDirective.js variables being passed in to one main variable
+* [ ] Unbind modelFormDirective from EditController
 
 Admin Theme
 ===

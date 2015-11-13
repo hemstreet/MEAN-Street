@@ -17,6 +17,9 @@ app.config(['$routeProvider', function ($routeProvider) {
         controller: 'LoginController',
         controllerAs: 'vm',
         requireAuth: false
+    }).when('/logout', {
+        controller: 'LogoutController',
+        requireAuth: false
     }).when('/signup', {
         templateUrl: 'views/signup.html',
         controller: 'SignupController',
