@@ -5,7 +5,6 @@
     "body-parser": "^1.0.2",
     "cookie-parser": "^1.4.0",
     "express": "^4.0.0",
-    "express-uncapitalize": "^1.0.0",
     "glob": "^5.0.15",
     "gulp": "^3.9.0",
     "gulp-livereload": "^3.8.1",
@@ -16,6 +15,5 @@
     "morgan": "^1.6.1",
     "password-hash": "^1.2.2",
     "q": "^1.4.1",
-    "serve-favicon": "^2.3.0"
   }
 }

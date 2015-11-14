@@ -25,7 +25,6 @@ model.getModels().then(function (models) {
     app.use(bodyParser.json());
     app.use(cookieParser());
     app.use(morgan(env));
-    app.use(require('express-uncapitalize')());
 
     app.use('/v1/rest', router);
     app.use('/', express.static(__dirname + '/app'));
