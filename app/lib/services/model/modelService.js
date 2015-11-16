@@ -1,6 +1,6 @@
 angular.module('restServer').service('modelService', ['config', function (config) {
 
-    this.stripProtected = function(_fields) {
+    this.stripHidden = function(_fields) {
         var fields = [];
 
         angular.forEach(_fields, function(value) {

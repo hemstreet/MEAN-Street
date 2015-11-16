@@ -1,4 +1,4 @@
-* This project is a work in progress *
+**This project is a work in progress**
 
 Node REST
 ===
@@ -22,7 +22,7 @@ Run `node server.js` and the server is set up!
 * [ ] Form render from Schema
 * [x] Dynamic routes
 * [ ] View Templates
-* [ ] Server prototype type instantiation for quick deploy `new Server({ port: 3001 }); 
+* [ ] Server prototype type instantiation for quick deploy `new Server({ port: 3001 });
 * [ ] implement /schema/:model route to dynamically get a models schema  
 
 

@@ -18,7 +18,7 @@ angular.module('restServer').controller('ListController', ['$scope', '$routePara
     httpService.list({
         modelName: modelName
     }).then(function (response) {
-        vm.models = response.data;
+        vm.models = response.data.entries;
     });
 
 }]);

@@ -96,7 +96,7 @@ angular.module('restServer').service('httpService', ['$http', 'config', '$q', 'm
             var fields = response.data.fields;
 
             if(options.protected) {
-                fields = modelService.stripProtected(fields);
+                fields = modelService.stripHidden(fields);
             }
 
             defer.resolve(fields);
