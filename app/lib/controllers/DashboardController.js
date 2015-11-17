@@ -3,7 +3,7 @@ angular.module('restServer').controller('DashboardController', ['$scope', 'httpS
     var vm = this;
 
     httpService.getModels().then(function(models) {
-        vm.models = models;
+        vm.models = models.models;
     });
 
 }]);
