@@ -1,5 +1,9 @@
 {
-  "name": "node-rest",
+  "name": "mean-street",
+  "version": "1.0.0",
+  "author": "Jon Hemstreet",
+  "description": "Easy REST server",
+  "license": "ISC",
   "main": "server.js",
   "dependencies": {
     "body-parser": "^1.0.2",
