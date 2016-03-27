@@ -3,8 +3,9 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     mongoose = require('mongoose'),
     morgan = require('morgan'),
-    port = process.env.PORT || 3000,
-    env = process.env.ENV || 'dev',
+    argv = require('yargs').argv,
+    port = argv.port || process.env.PORT || 3000,
+    env = argv.env || process.env.ENV || 'dev',
     router = express.Router(),
     config = require('./config/config'),
     Auth = require('./lib/Auth.js'),
@@ -16,8 +17,11 @@ var express = require('express'),
     Db = require('./lib/Database.js'),
     db = new Db({
         db: mongoose
-    }),
-    argv = require('yargs');
+    });
+
+config.secret = argv.secret || config.secret;
+config.database = argv.database || config.database;
+config.baseUrl = argv.baseUrl || config.baseUrl;
 
 model.getModels().then(function (models) {
 
@@ -28,14 +32,11 @@ model.getModels().then(function (models) {
     app.use(morgan(env));
 
     app.use('/v1/rest', router);
-    app.use('/', express.static(__dirname + '/app'));
+    app.use('/' , express.static(__dirname + '/app'));
 
     app.get('/', function (req, res) {
         res.sendFile('/index.html');
     });
-
-    config.secret = argv.secret || config.secret;
-    config.database = argv.database || config.database;
 
     // Include routes
     var routeOptions = {
