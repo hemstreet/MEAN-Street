@@ -32,7 +32,9 @@ Troubleshooting
 * [x] Dynamic routes
 * [ ] View Templates
 * [ ] Server prototype type instantiation for quick deploy `new Server({ port: 3001 });
-* [ ] implement /schema/:model route to dynamically get a models schema  
+* [x] implement /schema/:model route to dynamically get a models schema
+* [ ] Ability to pass express object to extend existing projects
+* [ ] Argv to accept custom schema / model paths outside of node module
 
 
 Helpful Resources
