@@ -4,6 +4,8 @@ Node REST
 ===
 Quick setup REST server with admin interface for more intuitive data manipulation.
 
+Get it as a node module `npm install mean-street`
+
 Make sure to run `npm install` to get all the dependencies.
 Make sure you run `bower install` inside of the `/app` folder
 
@@ -35,7 +37,8 @@ Troubleshooting
 * [x] implement /schema/:model route to dynamically get a models schema
 * [ ] Ability to pass express object to extend existing projects
 * [ ] Argv to accept custom schema / model paths outside of node module
-
+* [x] Update user password
+* [ ] Update Role from admin area
 
 Helpful Resources
 ===
