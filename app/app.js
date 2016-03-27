@@ -1,7 +1,7 @@
 var app = angular.module('restServer', ['ngRoute', 'ipCookie']);
 
 app.constant('config', {
-    "baseUrl": "/v1/rest",
+    "baseUrl": "/api/v1",
     "token": {
         "name": "x-access-token",
         "expiration": 720

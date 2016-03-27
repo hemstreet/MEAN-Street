@@ -31,7 +31,7 @@ model.getModels().then(function (models) {
     app.use(cookieParser());
     app.use(morgan(env));
 
-    app.use('/v1/rest', router);
+    app.use('/api/v1', router);
     app.use('/' , express.static(__dirname + '/app'));
 
     app.get('/', function (req, res) {

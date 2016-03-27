@@ -13,6 +13,8 @@ Run `node server.js --secret MadeUpSecretKeyGoesHere [,--database databasePath, 
 To setup admin, go to `/signup`. Signup with your custom username / password then edit the
 entry to have `"admin" : true` for admin privileges
 
+[View a list of available api endpoints](https://github.com/hemstreet/MEAN-Street/blob/master/docs/routes.md)
+
 
 * [x] Breakout functionality from server.js
 * [ ] move /lib/*.js files to a better place
