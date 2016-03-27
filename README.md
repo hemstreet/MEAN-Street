@@ -6,6 +6,8 @@ Quick setup REST server with admin interface for more intuitive data manipulatio
 
 Get it as a node module `npm install mean-street`
 
+=OR=
+
 Make sure to run `npm install` to get all the dependencies.
 Make sure you run `bower install` inside of the `/app` folder
 
@@ -15,6 +17,7 @@ To setup admin, go to `/signup`. Signup with your custom username / password the
 entry to have `"admin" : true` for admin privileges
 
 [View a list of available api endpoints](https://github.com/hemstreet/MEAN-Street/blob/master/docs/routes.md)
+[View a list of available CRUD endpoints](https://github.com/hemstreet/MEAN-Street/blob/master/docs/CRUD.md)
 
 Troubleshooting
 ===
