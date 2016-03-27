@@ -16,7 +16,8 @@ var express = require('express'),
     Db = require('./lib/Database.js'),
     db = new Db({
         db: mongoose
-    });
+    }),
+    argv = require('yargs');
 
 model.getModels().then(function (models) {
 
@@ -32,6 +33,9 @@ model.getModels().then(function (models) {
     app.get('/', function (req, res) {
         res.sendFile('/index.html');
     });
+
+    config.secret = argv.secret || config.secret;
+    config.database = argv.database || config.database;
 
     // Include routes
     var routeOptions = {

@@ -1,8 +1,0 @@
-{
-    "secret" : "secretPassphrase",
-    "database": "mongodb://username:password@host:port/database",
-    "token" : {
-        "name" : "x-access-token",
-        "expiration" : 31449600
-    }
-}

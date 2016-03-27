@@ -5,11 +5,13 @@ Node REST
 
 *Make sure to have mongo running.*
 
-Create a config inside of `config/config.json`. Use the `_config.json` as a template.
 Make sure to run `npm install` to get all the dependencies.
 Make sure you run `bower install` inside of the `/app` folder
 
-Run `node server.js` and the server is set up!
+Run `node server.js --secret MadeUpSecretKeyGoesHere [,--database databasePath]` and the server is set up!
+
+To setup admin, go to `/signup`. Signup with your custom username / password then edit the
+entry to have `"admin" : true` for admin privileges
 
 * [x] Breakout functionality from server.js
 * [ ] move /lib/*.js files to a better place
