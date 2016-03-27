@@ -1,0 +1,11 @@
+{
+  "name": {
+    "type" : "String",
+    "unique": true,
+    "required" : true
+  },
+  "pump": {
+    "type" :"Number",
+    "required" : true
+  }
+}
