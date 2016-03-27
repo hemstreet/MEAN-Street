@@ -1,7 +1,6 @@
 {
     "secret" : "MySecret",
     "database": "mongodb://localhost/ballmer",
-    "baseUrl" : "rest",
     "token" : {
         "name" : "x-access-token",
         "expiration" : 31449600

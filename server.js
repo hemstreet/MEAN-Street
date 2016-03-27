@@ -1,4 +1,3 @@
 'use strict';
 
-
-module.exports = require('./lib/_server');
+module.exports = require('./lib/Server');

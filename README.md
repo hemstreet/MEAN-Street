@@ -11,7 +11,7 @@ Get it as a node module `npm install mean-street`
 Make sure to run `npm install` to get all the dependencies.
 Make sure you run `bower install` inside of the `/app` folder
 
-Run `node _server.js --secret MadeUpSecretKeyGoesHere [,--database databasePath, --port 3000, --baseUrl rest, --env dev, ]` and the server is set up!
+Run `node Server.js --secret MadeUpSecretKeyGoesHere [,--database databasePath, --port 3000, --baseUrl rest, --env dev, ]` and the server is set up!
 
 To setup admin, go to `/signup`. Signup with your custom username / password then edit the
 entry to have `"admin" : true` for admin privileges
@@ -25,7 +25,7 @@ Troubleshooting
 
 @TODO
 ===
-* [x] Breakout functionality from _server.js
+* [x] Breakout functionality from Server.js
 * [ ] move /lib/*.js files to a better place
 * [ ] Front End
 * [x] Authentication

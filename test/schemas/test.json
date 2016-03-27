@@ -1,0 +1,15 @@
+{
+  "name": {
+    "type" : "String",
+    "unique": true,
+    "required" : true,
+    "placeholder" : "Name",
+    "fieldType" : "text"
+  },
+  "proportions": {
+    "type" :"Object",
+    "required" : true,
+    "placeholder" : "Proportions as string object",
+    "fieldType" : "text"
+  }
+}
