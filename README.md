@@ -2,8 +2,7 @@
 
 Node REST
 ===
-
-*Make sure to have mongo running.*
+Quick setup REST server with admin interface for more intuitive data manipulation.
 
 Make sure to run `npm install` to get all the dependencies.
 Make sure you run `bower install` inside of the `/app` folder
@@ -15,7 +14,12 @@ entry to have `"admin" : true` for admin privileges
 
 [View a list of available api endpoints](https://github.com/hemstreet/MEAN-Street/blob/master/docs/routes.md)
 
+Troubleshooting
+===
+*Make sure to have mongo running.*
 
+@TODO
+===
 * [x] Breakout functionality from server.js
 * [ ] move /lib/*.js files to a better place
 * [ ] Front End
@@ -31,6 +35,6 @@ entry to have `"admin" : true` for admin privileges
 * [ ] implement /schema/:model route to dynamically get a models schema  
 
 
-Models
+Helpful Resources
 ===
 * [http://mongoosejs.com/docs/2.7.x/docs/schematypes.html](http://mongoosejs.com/docs/2.7.x/docs/schematypes.html)
