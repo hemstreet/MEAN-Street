@@ -3,14 +3,16 @@ var Importer = require('../Importer'),
     jsonHttp = require('json-http'),
     _ = require('lodash');
 
-jsonHttp.getJson('http://www.thecocktaildb.com/api/json/v1/1/list.php?i=list', function(error, response) {
+var baseApi = 'http://www.thecocktaildb.com/api/json/v1/1/';
+
+jsonHttp.getJson(baseApi + 'list.php?i=list', function(error, response) {
     var ingredients = response.drinks;
 
     _.each(ingredients, function(value, key) {
 
         var timeout = 600000;
         setTimeout(function() {
-            jsonHttp.getJson('http://www.thecocktaildb.com/api/json/v1/1/filter.php?i=' + value.strIngredient1, function(error, response) {
+            jsonHttp.getJson(baseApi + 'filter.php?i=' + value.strIngredient1, function(error, response) {
 
                 if(error) {
                     console.log(error);
@@ -23,7 +25,7 @@ jsonHttp.getJson('http://www.thecocktaildb.com/api/json/v1/1/list.php?i=list', f
                 _.each(drinks, function(value, key) {
 
                     setTimeout(function() {
-                        var url = 'http://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=' + value.idDrink;
+                        var url = baseApi + 'lookup.php?i=' + value.idDrink;
                         jsonHttp.getJson(url, function(error, response) {
                             if(error) {
                                 console.log(error);
