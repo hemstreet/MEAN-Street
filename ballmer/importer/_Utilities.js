@@ -50,4 +50,4 @@ Utilities.prototype._getSpecialIngredients = function(value) {
   // check to see if we have a ingredient that we can not pour
 };
 
-module.exports = new Utilities();
+module.exports = Utilities;
