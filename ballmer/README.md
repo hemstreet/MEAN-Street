@@ -11,7 +11,7 @@ drinks : [
         ingredients: [
             {
                 name: "tequila",
-                qty: 1.5
+                quantity: 1.5
 
             }
         ]

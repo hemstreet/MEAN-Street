@@ -1,0 +1,15 @@
+{
+  "name": {
+    "type" : "String",
+    "unique": true,
+    "required" : true,
+    "placeholder" : "Bottle Name",
+    "fieldType" : "text"
+  },
+  "pump": {
+    "type" :"Number",
+    "required" : true,
+    "placeholder" : "Pump Number",
+    "fieldType" : "number"
+  }
+}
