@@ -1,3 +1,7 @@
+For getAvailableDrinks() either do mongo search or get the full data back and parse it using
+_.where
+_.pluck
+
 All measurements are in oz
 
 Proposed API
