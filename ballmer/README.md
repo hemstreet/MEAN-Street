@@ -17,6 +17,9 @@ drinks : [
                 name: "tequila",
                 quantity: 1.5
 
+            },
+            {
+                ...
             }
         ]
     }

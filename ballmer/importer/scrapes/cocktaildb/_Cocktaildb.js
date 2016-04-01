@@ -1,4 +1,4 @@
-var Importer = require('../Importer'),
+var Importer = require('../../Importer'),
     importer = new Importer(),
     jsonHttp = require('json-http'),
     _ = require('lodash');
