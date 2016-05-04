@@ -1,5 +1,17 @@
 **This project is a work in progress**
 
+
+
+
+
+TO RUN BALLMER BOT REST SERVER RUN ballmer/rest.js ;)
+
+
+
+
+
+
+
 Node REST
 ===
 Quick setup REST server with admin interface for more intuitive data manipulation.
