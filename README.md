@@ -1,17 +1,3 @@
-**This project is a work in progress**
-
-
-
-
-
-TO RUN BALLMER BOT REST SERVER RUN ballmer/rest.js ;)
-
-
-
-
-
-
-
 Node REST
 ===
 Quick setup REST server with admin interface for more intuitive data manipulation.
@@ -23,7 +9,7 @@ Get it as a node module `npm install mean-street`
 Make sure to run `npm install` to get all the dependencies.
 Make sure you run `bower install` inside of the `/app` folder
 
-Run `node Server.js --secret MadeUpSecretKeyGoesHere [,--database databasePath, --port 3000, --baseUrl rest, --env dev, ]` and the server is set up!
+Run `node rest.js --secret MadeUpSecretKeyGoesHere [,--database databasePath, --port 3000, --baseUrl rest, --env dev, ]` and the server is set up!
 
 To setup admin, go to `/signup`. Signup with your custom username / password then edit the
 entry to have `"admin" : true` for admin privileges
@@ -39,7 +25,7 @@ Troubleshooting
 ===
 * [x] Breakout functionality from Server.js
 * [ ] move /lib/*.js files to a better place
-* [ ] Front End
+* [x] Front End
 * [x] Authentication
 * [x] Password hashing
 * [x] Register / Sign up
