@@ -17,9 +17,10 @@ entry to have `"admin" : true` for admin privileges
 [View a list of available api endpoints](https://github.com/hemstreet/MEAN-Street/blob/master/docs/routes.md)
 [View a list of available CRUD endpoints](https://github.com/hemstreet/MEAN-Street/blob/master/docs/CRUD.md)
 
+
 Troubleshooting
 ===
-*Make sure to have mongo running.*
+*Make sure to have mongo running*
 
 @TODO
 ===
@@ -40,6 +41,7 @@ Troubleshooting
 * [ ] Argv to accept custom schema / model paths outside of node module
 * [x] Update user password
 * [ ] Update Role from admin area
+* [ ] Integrate search w/ setup guide
 
 Helpful Resources
 ===
