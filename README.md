@@ -17,6 +17,11 @@ entry to have `"admin" : true` for admin privileges
 [View a list of available api endpoints](https://github.com/hemstreet/MEAN-Street/blob/master/docs/routes.md)
 [View a list of available CRUD endpoints](https://github.com/hemstreet/MEAN-Street/blob/master/docs/CRUD.md)
 
+Search
+===
+This search uses solr. To run Solr
+    `bin/solr start` ( you may need to chmod 775 bin/solr ) and run it via `./solr start`
+    `bin/solr create -c <coreName>`` ( if this does not work than try ``./solr create -c <coreName>`
 
 Troubleshooting
 ===
