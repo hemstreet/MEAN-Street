@@ -3,6 +3,7 @@ Node REST
 Quick setup REST server with admin interface for more intuitive data manipulation.
 
 Get it as a node module `npm install mean-street`
+You may have to `bower_install` inside `app/`
 
 =OR=
 
