@@ -1,8 +1,19 @@
 {
     "secret" : "MySecret",
-    "database": "mongodb://localhost/ballmer",
+    "port" : "3000",
+    "env" : "dev",
+    "database" : {
+        "host" : "mongodb://localhost/",
+        "name" : "tacoTestDatabase"
+    },
     "token" : {
         "name" : "x-access-token",
         "expiration" : 31449600
-    }
+    },
+    "flags" : [
+        "secret",
+        "port",
+        "database",
+        "env"
+    ]
 }

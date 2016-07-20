@@ -1,14 +1,13 @@
 var gulp = require('gulp'),
-    nodemon = require('gulp-nodemon');
+    nodemon = require('gulp-nodemon'),
+    config = require('./config/config');
 
 gulp.task('default', function () {
     nodemon({
-        script: 'rest.js'
-        , ext: 'js html json'
-        , env: {
-            'NODE_ENV': 'development',
-            'ENV': 'dev',
-            'PORT': 3000
-        }
+        script: 'example/server.js',
+        ext: 'js html json',
+        args: config.flags.map(function(key) {
+            return '--' + key;
+        })
     })
 });

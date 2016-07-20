@@ -4,6 +4,9 @@
   "author": "Jon Hemstreet",
   "description": "Easy REST server",
   "license": "ISC",
+  "scripts": {
+    "start" : "gulp"
+  },
   "main": "server.js",
   "dependencies": {
     "body-parser": "^1.0.2",

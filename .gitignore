@@ -6,3 +6,5 @@ lib/models/*
 
 !lib/schemas/user.json
 !lib/models/user.js
+
+app/bower_components

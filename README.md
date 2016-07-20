@@ -10,7 +10,8 @@ You may have to `bower_install` inside `app/`
 Make sure to run `npm install` to get all the dependencies.
 Make sure you run `bower install` inside of the `/app` folder
 
-Run `node rest.js --secret MadeUpSecretKeyGoesHere [,--database databasePath, --port 3000, --baseUrl rest, --env dev, ]` and the server is set up!
+Run `gulp [, --port 3000, --secret MadeUpSecretKeyGoesHere --database ``{"name": "myNewTestDatabaseName"}``, --env dev, ]` and the server is set up!
+For more available flags check `config/config.json` for the `flags` parameter
 
 To setup admin, go to `/signup`. Signup with your custom username / password then edit the
 entry to have `"admin" : true` for admin privileges
