@@ -5,7 +5,7 @@
   "description": "Easy REST server",
   "license": "ISC",
   "scripts": {
-    "start" : "gulp"
+    "start": "gulp"
   },
   "main": "server.js",
   "dependencies": {
@@ -28,5 +28,13 @@
     "solr-client": "^0.6.0",
     "solr-query-builder": "^1.0.1",
     "yargs": "^4.3.2"
+  },
+  "devDependencies": {
+    "gulp-autoload-tasks": "0.0.3",
+    "gulp-jshint": "^2.0.1",
+    "gulp-load-plugins": "^1.2.4",
+    "gulp-watch": "^4.3.8",
+    "jshint": "^2.9.2",
+    "jshint-stylish": "^2.2.0"
   }
 }

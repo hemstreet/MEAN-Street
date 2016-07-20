@@ -1,13 +1,7 @@
 var gulp = require('gulp'),
-    nodemon = require('gulp-nodemon'),
+    plugins = require('gulp-load-plugins')(gulp),
     config = require('./config/config');
 
-gulp.task('default', function () {
-    nodemon({
-        script: 'example/server.js',
-        ext: 'js html json',
-        args: config.flags.map(function(key) {
-            return '--' + key;
-        })
-    })
-});
+require('gulp-autoload-tasks')(gulp, plugins, config, 'tasks');
+
+gulp.task('default', ['run', 'watch']);
