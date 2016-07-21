@@ -1,7 +1,6 @@
 var nodemon = require('nodemon');
 var argv = require('yargs').argv;
 
-
 module.exports = function (gulp, plugins, config) {
 
     function buildArgList() {
@@ -11,7 +10,6 @@ module.exports = function (gulp, plugins, config) {
                 args.push("--" + key + "=" + argv[key]);
             }
         });
-
         return args;
     };
 
