@@ -8,5 +8,5 @@ lib/models/*
 !lib/models/user.js
 
 app/bower_components
-./files/*
+files
 !./files/.keep
