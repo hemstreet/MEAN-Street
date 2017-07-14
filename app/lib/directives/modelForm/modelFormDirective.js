@@ -1,4 +1,4 @@
-angular.module('restServer').directive('modelForm', ['httpService', function (httpService) {
+angular.module('restServer').directive('modelForm', ['$parse', 'config', 'httpService', function ($parse, config, httpService) {
     return {
         restrict: 'E',
         scope: {
@@ -7,6 +7,18 @@ angular.module('restServer').directive('modelForm', ['httpService', function (ht
         },
         templateUrl: './lib/directives/modelForm/modelForm.html',
         controller: function ($scope) {
+
+            console.log($scope);
+            $scope.url = config.baseUrl + '/create/' + $scope.model.modelName;
+
+            // $scope.$watch('model', (newValue) => {
+            //     if(newValue.fileFields.length > 0) {
+            //         newValue.fileFields.forEach(field => {
+            //             $scope[field] = new FileUploader();
+            //         })
+            //     }
+            // }, true);
+
             $scope.submitForm = function () {
 
                 var fieldData = $scope.model.formData;

@@ -13,6 +13,7 @@
     "cookie-parser": "^1.4.0",
     "cors": "^2.7.1",
     "express": "^4.0.0",
+    "express-fileupload": "^0.1.4",
     "glob": "^5.0.15",
     "gulp": "^3.9.0",
     "gulp-livereload": "^3.8.1",
@@ -27,6 +28,8 @@
     "request": "^2.69.0",
     "solr-client": "^0.6.0",
     "solr-query-builder": "^1.0.1",
+    "underscore": "^1.8.3",
+    "uuid4": "^1.0.0",
     "yargs": "^4.3.2"
   },
   "devDependencies": {

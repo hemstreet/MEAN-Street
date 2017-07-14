@@ -9,6 +9,7 @@ angular.module('restServer').controller('CreateController', ['$scope', '$routePa
     vm.model = {
         modelName: modelName,
         fields: null,
+        fileFields: [],
         schema: null
     };
 
@@ -16,7 +17,7 @@ angular.module('restServer').controller('CreateController', ['$scope', '$routePa
         modelName: modelName,
         protected: true
     }).then(function (data) {
-        vm.model.fields = data
+        vm.model.fields = data;
     }, function (err) {
         vm.err = err;
     });
@@ -25,6 +26,13 @@ angular.module('restServer').controller('CreateController', ['$scope', '$routePa
         modelName: modelName
     }).then(function (data) {
         vm.model.schema = data;
+        let fieldKeys = Object.keys(vm.model.schema);
+
+        fieldKeys.forEach(field => {
+            if(vm.model.schema[field].fieldType === 'file') {
+                vm.model.fileFields.push(field);
+            }
+        });
     }, function (err) {
         vm.err = err;
     });

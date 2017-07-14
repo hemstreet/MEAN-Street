@@ -1,4 +1,4 @@
-var app = angular.module('restServer', ['ngRoute', 'ipCookie']);
+var app = angular.module('restServer', ['ngRoute', 'ipCookie', 'angularFileUpload']);
 
 app.constant('config', {
     "baseUrl": "/api/v1",

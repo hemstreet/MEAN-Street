@@ -11,6 +11,7 @@ angular.module('restServer').controller('EditController', ['$routeParams', 'http
         modelName: modelName,
         _id: _id,
         fields: null,
+        fileFields: [],
         schema: null,
         modelData: null
     };
@@ -28,7 +29,8 @@ angular.module('restServer').controller('EditController', ['$routeParams', 'http
         modelName: modelName,
         protected: true
     }).then(function (data) {
-        vm.model.fields = data
+        vm.model.fields = data;
+
     }, function (err) {
         vm.err = err;
     });
@@ -37,6 +39,15 @@ angular.module('restServer').controller('EditController', ['$routeParams', 'http
         modelName: modelName
     }).then(function (data) {
         vm.model.schema = data;
+
+        let fieldKeys = Object.keys(vm.model.schema);
+
+        fieldKeys.forEach(field => {
+            if(vm.model.schema[field].fieldType === 'file') {
+                vm.model.fileFields.push(field);
+            }
+        });
+
     }, function (err) {
         vm.err = err;
     });
