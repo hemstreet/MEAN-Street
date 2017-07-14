@@ -8,8 +8,15 @@ angular.module('restServer').directive('modelForm', ['$parse', 'config', 'httpSe
         templateUrl: './lib/directives/modelForm/modelForm.html',
         controller: function ($scope) {
 
-            console.log($scope);
-            $scope.url = config.baseUrl + '/create/' + $scope.model.modelName;
+            $scope.formAction = 'post';
+
+            let model = $scope.model.modelName.toLowerCase();
+
+            if ($scope.action  === 'update') {
+                model += `/${$scope.model._id}`
+            }
+
+            $scope.url = `${config.baseUrl}/${$scope.action}/${model}`;
 
             // $scope.$watch('model', (newValue) => {
             //     if(newValue.fileFields.length > 0) {
