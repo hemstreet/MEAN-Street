@@ -9,43 +9,42 @@ angular.module('restServer').directive('modelForm', ['$parse', 'config', 'httpSe
         controller: function ($scope) {
 
             $scope.formAction = 'post';
-
+            $scope.method = 'POST';
             let model = $scope.model.modelName.toLowerCase();
 
             if ($scope.action  === 'update') {
+                $scope.method = 'PUT';
                 model += `/${$scope.model._id}`
             }
 
             $scope.url = `${config.baseUrl}/${$scope.action}/${model}`;
 
-            // $scope.$watch('model', (newValue) => {
-            //     if(newValue.fileFields.length > 0) {
-            //         newValue.fileFields.forEach(field => {
-            //             $scope[field] = new FileUploader();
-            //         })
-            //     }
-            // }, true);
+            $scope.submitForm = function (event) {
+                event.preventDefault();
 
-            $scope.submitForm = function () {
+                let form = $(this);
+                // You need to use standart javascript object here
+                var formData = new FormData(form);
 
-                var fieldData = $scope.model.formData;
-                if($scope.model.modelData && $scope.model.formData) {
-                    // Map our form values to our current model incase any values are missing
-                    fieldData = angular.extend({}, $scope.model.modelData, $scope.model.formData);
-                }
-
-                var options = {
-                    _id: $scope.model._id,
-                    modelName: $scope.model.modelName,
-                    data: fieldData
-                };
-
-                httpService[$scope.action](options)
-                    .then(function(response) {
-                        $scope.response = response.data.message;
-                    }, function(err) {
-                        $scope.response = err
-                    });
+                $.ajax({
+                    url: $scope.url,
+                    data: formData,
+                    type: $scope.method.toUpperCase(),
+                    contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
+                    processData: false, // NEEDED, DON'T OMIT THIS
+                    success: response => {
+                        console.log(response);
+                    }
+                    // ... Other options like success and etc
+                });
+                // $.ajax({
+                //     url: $scope.url,
+                //     type: ,
+                //     data: $scope.model.formData,
+                //     success: function(result) {
+                //         console.log('success', result);
+                //     }
+                // });
             };
         }
     }

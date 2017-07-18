@@ -1,10 +1,9 @@
-<form action='{{url}}'
+<form ng-submit="submitForm($event)" action='{{url}}'
       method='POST'
       encType="multipart/form-data">
     <div class="form-group" ng-repeat="field in model.fields">
         <!-- normal model -->
         <input ng-if="!model.schema[field].select" class="form-control" ng-model="model.formData[field]" ng-value="model.modelData[field]" placeholder="{{model.schema[field].placeholder || field }}" name="{{field}}" type="{{model.schema[field].fieldType}}" autofocus>
-
         <!-- If we are selecting a model -->
         <select ng-if="model.schema[field].select">
             <option>sdf</option>

@@ -1,7 +1,7 @@
 {
   "username": {
     "type": "String",
-    "unique": true,
+    "unique": false,
     "placeholder" : "Username",
     "fieldType" : "text"
   },
@@ -9,7 +9,7 @@
     "type": "String",
     "fieldType" : "password",
     "placeholder" : "Password",
-    "hidden" : true
+    "hidden" : false
   },
   "_admin": {
     "type": "Boolean"
